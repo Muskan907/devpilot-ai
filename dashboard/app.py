@@ -28,6 +28,7 @@ from core.blackboard import global_blackboard  # noqa: E402
 from core.hitl import hitl_gatekeeper  # noqa: E402
 from core.observability.tool_validation import tool_validation_stats  # noqa: E402
 from mcp_servers.repo_tool import mcp_repo_client  # noqa: E402
+from core.schemas.repository import RepositoryConfig  # noqa: E402
 from orchestration import AutonomousEngineeringOrchestrator, AgenticPatternType, PersonaType  # noqa: E402
 
 st.set_page_config(page_title="DevPilot AI · Autonomous Software Engineering", page_icon="⚡",
@@ -198,7 +199,8 @@ CONFIG_LABELS = {"C1": "C1 Hierarchical + Blackboard", "C2": "C2 Sequential", "C
                  "C1S": "C1 + Strict persona", "C1P": "C1 + Permissive persona"}
 PALETTE = ["#7C83FF", "#22D3EE", "#F472B6", "#FBBF24", "#34D399"]
 
-for key, default in (("metrics", None), ("judge", None), ("rag_run_id", None), ("compare_rows", [])):
+for key, default in (("metrics", None), ("judge", None), ("rag_run_id", None), ("compare_rows", []),
+                     ("repo_url", "sample_repo"), ("repo_branch", "main"), ("rag_repo", None)):
     st.session_state.setdefault(key, default)
 
 
@@ -226,14 +228,25 @@ def short_agent(agent_id: str) -> str:
     return agent_id.split(":")[-1].replace("Agent", "")
 
 
-def run_pipeline(prompt: str, pattern, persona, prompt_style):
+def is_remote(repo: str) -> bool:
+    return repo.startswith(("https://", "http://"))
+
+
+def repo_target(repo: str, branch: str):
+    repo = (repo or "sample_repo").strip()
+    if is_remote(repo):
+        return RepositoryConfig(repo_url=repo, base_branch=(branch or "").strip() or None)
+    return repo
+
+
+def run_pipeline(prompt: str, pattern, persona, prompt_style, repo: str = "sample_repo", branch: str = "main"):
     global_blackboard.reset()
     tool_validation_stats.reset()
     orch = AutonomousEngineeringOrchestrator(
         pattern=pattern, persona=persona,
         coder_prompt_style=prompt_style if pattern == AgenticPatternType.HIERARCHICAL_BLACKBOARD_A2A else None,
     )
-    return orch.execute_requirement(prompt, target_repo="sample_repo")
+    return orch.execute_requirement(prompt, target_repo=repo_target(repo, branch))
 
 
 def friendly_error(err: str) -> str:
@@ -352,8 +365,17 @@ with tab_home:
 # STUDIO
 # =============================================================================
 with tab_run:
-    section("Engineering Studio", "Describe a change to the sample calculator repository and let the agents build it.")
+    section("Engineering Studio", "Point the agents at a repository, describe a change, and let them build and test it.")
     with st.container(border=True):
+        r1, r2 = st.columns([4, 1])
+        st.session_state.repo_url = r1.text_input(
+            "Repository", value=st.session_state.repo_url, key="inp_repo",
+            help="'sample_repo' (built-in calculator project) or any public GitHub HTTPS URL of a Python project with pytest tests.")
+        st.session_state.repo_branch = r2.text_input("Branch", value=st.session_state.repo_branch, key="inp_branch")
+        if is_remote(st.session_state.repo_url):
+            st.caption("The repository is cloned into an isolated sandbox through the MCP repo_tool. Works best with small, "
+                       "pure-Python projects that have a pytest suite and no heavy dependencies. Write a custom requirement "
+                       "naming the file to change.")
         left, right = st.columns([3, 2], gap="large")
         with left:
             preset = st.selectbox("Example task", list(PRESETS), index=0, key="sel_preset")
@@ -374,7 +396,8 @@ with tab_run:
         with st.status("Agents at work: retrieving code, planning, coding, testing…", expanded=False) as status:
             try:
                 st.session_state.metrics = run_pipeline(prompt.strip(), ARCH_OPTIONS[arch_label],
-                                                        PERSONAS[persona_label], PROMPT_STYLES[style_label])
+                                                        PERSONAS[persona_label], PROMPT_STYLES[style_label],
+                                                        st.session_state.repo_url, st.session_state.repo_branch)
                 status.update(label="Run complete", state="complete" if st.session_state.metrics.success else "error")
             except Exception as exc:  # noqa: BLE001
                 st.session_state.metrics = None
@@ -483,7 +506,8 @@ with tab_run:
             c1, c2 = st.columns(2)
             notes = c1.text_input("Reviewer notes", value="Tests pass and the diff is minimal.")
             if c1.button("✅ Approve", key="btn_hitl_approve", disabled=not m.success):
-                res = hitl_gatekeeper.approve_and_commit(run_id=m.run_id, approver="Reviewer", notes=notes, target_repo="sample_repo")
+                res = hitl_gatekeeper.approve_and_commit(run_id=m.run_id, approver="Reviewer", notes=notes,
+                                                         target_repo=st.session_state.repo_url)
                 (st.success if res.get("success") else st.error)(res.get("message") or res.get("error") or "Done")
             reason = c2.text_input("Rejection reason", value="Does not meet the requirement.")
             if c2.button("❌ Reject", key="btn_hitl_reject"):
@@ -628,14 +652,21 @@ with tab_eval:
 # CODEBASE
 # =============================================================================
 with tab_code:
-    section("Codebase", "The target repository: a small Python calculator package with a pytest suite. Every run works on an isolated sandbox copy.")
+    section("Codebase", "Browse and search the selected repository. Change it in the Studio tab; every run works on an isolated sandbox copy.")
+    cur_repo = (st.session_state.repo_url or "sample_repo").strip()
+    st.markdown(f"Repository: `{cur_repo}`" + (f" · branch `{st.session_state.repo_branch}`" if is_remote(cur_repo) else ""))
     reindex = st.button("Re-index repository", key="btn_connect_repo")
-    if st.session_state.rag_run_id is None or reindex:
-        with st.spinner("Indexing the repository (AST chunks → vector store)…"):
-            sb = mcp_repo_client.create_sandbox("sample_repo")
+    if st.session_state.rag_run_id is None or reindex or st.session_state.rag_repo != cur_repo:
+        with st.spinner("Cloning and indexing the repository (AST chunks → vector store)…"):
+            sb = (mcp_repo_client.clone_repository(cur_repo, base_branch=(st.session_state.repo_branch or "").strip() or None)
+                  if is_remote(cur_repo) else mcp_repo_client.create_sandbox(cur_repo))
+            st.session_state.rag_repo = cur_repo
             if sb.get("success"):
                 st.session_state.rag_run_id = sb["run_id"]
                 st.session_state.rag_stats = mcp_repo_client.index_rag(sb["run_id"])
+            else:
+                st.session_state.rag_run_id, st.session_state.rag_stats = None, {}
+                st.error(f"Could not load the repository: {sb.get('error')}")
     stats = st.session_state.get("rag_stats") or {}
     kpis([("Index", "Ready" if stats.get("success") else "Not indexed", "dp-ok" if stats.get("success") else "dp-bad"),
           ("Code chunks", stats.get("total_chunks_scanned", 0), ""), ("Chunking", "Python AST", ""),
