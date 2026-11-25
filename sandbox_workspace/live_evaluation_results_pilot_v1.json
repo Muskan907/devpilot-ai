@@ -1,0 +1,400 @@
+[
+  {
+    "task_id": "T1",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-c2b1727e",
+    "success": true,
+    "tests_passed": 13,
+    "tests_total": 13,
+    "recovery_cycles": 0,
+    "total_time_s": 51.933,
+    "prompt_tokens": 4139,
+    "completion_tokens": 2777,
+    "total_tokens": 6916,
+    "cost_usd": 0.001525,
+    "a2a_messages": 4,
+    "tool_calls": 4,
+    "is_estimated": false,
+    "error": null,
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.2075,
+        "tokens": 0,
+        "llm_calls": 0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.244,
+        "tokens": 0,
+        "llm_calls": 0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 10.3447,
+        "tokens": 3113,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 20.7289,
+        "tokens": 1755,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 15.9267,
+        "tokens": 2048,
+        "llm_calls": 1
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0061,
+        "tokens": 0,
+        "llm_calls": 0
+      }
+    ],
+    "excluded_from_stats": false,
+    "earlier_attempts": []
+  },
+  {
+    "task_id": "T1",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-81f8b277",
+    "success": false,
+    "tests_passed": 12,
+    "tests_total": 16,
+    "recovery_cycles": 0,
+    "total_time_s": 34.343,
+    "prompt_tokens": 1868,
+    "completion_tokens": 1655,
+    "total_tokens": 3523,
+    "cost_usd": 0.000849,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": "Sequential single pass failed: tests_all_passed=False, regressions=0, audit_passed=True",
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 17.7238,
+        "tokens": 1575,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 11.5843,
+        "tokens": 1948,
+        "llm_calls": 1
+      }
+    ],
+    "excluded_from_stats": false,
+    "earlier_attempts": []
+  },
+  {
+    "task_id": "T1",
+    "arch": "C3",
+    "architecture": "Critic-Reflection-Loop",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-REFL-436dc969",
+    "success": true,
+    "tests_passed": 14,
+    "tests_total": 14,
+    "recovery_cycles": 0,
+    "total_time_s": 38.953,
+    "prompt_tokens": 1839,
+    "completion_tokens": 1542,
+    "total_tokens": 3381,
+    "cost_usd": 0.000801,
+    "a2a_messages": 0,
+    "tool_calls": 5,
+    "is_estimated": false,
+    "error": null,
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 19.033,
+        "tokens": 1412,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 15.2088,
+        "tokens": 1969,
+        "llm_calls": 1
+      }
+    ],
+    "excluded_from_stats": false,
+    "earlier_attempts": [
+      {
+        "error": "SyntaxError: Sandbox contains syntax errors: [{'file': 'src\\\\calculator.py', 'line': 65, 'offset': 48, 'msg': 'invalid syntax', 'text': '        def test_popula",
+        "run_id": null
+      }
+    ]
+  },
+  {
+    "task_id": "T2",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-c403b08f",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 33.112,
+    "prompt_tokens": 3576,
+    "completion_tokens": 1762,
+    "total_tokens": 5338,
+    "cost_usd": 0.001062,
+    "a2a_messages": 8,
+    "tool_calls": 8,
+    "is_estimated": false,
+    "error": null,
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.3659,
+        "tokens": 0,
+        "llm_calls": 0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.1648,
+        "tokens": 0,
+        "llm_calls": 0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 7.0433,
+        "tokens": 2485,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 11.9317,
+        "tokens": 1479,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.3032,
+        "tokens": 1374,
+        "llm_calls": 1
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0049,
+        "tokens": 0,
+        "llm_calls": 0
+      }
+    ],
+    "excluded_from_stats": false,
+    "earlier_attempts": []
+  },
+  {
+    "task_id": "T2",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-575a48d7",
+    "success": true,
+    "tests_passed": 16,
+    "tests_total": 16,
+    "recovery_cycles": 0,
+    "total_time_s": 35.752,
+    "prompt_tokens": 1693,
+    "completion_tokens": 1286,
+    "total_tokens": 2979,
+    "cost_usd": 0.000684,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 15.1908,
+        "tokens": 1268,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 16.0209,
+        "tokens": 1711,
+        "llm_calls": 1
+      }
+    ],
+    "excluded_from_stats": false,
+    "earlier_attempts": []
+  },
+  {
+    "task_id": "T2",
+    "arch": "C3",
+    "architecture": "Critic-Reflection-Loop",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-REFL-fb783a02",
+    "success": true,
+    "tests_passed": 14,
+    "tests_total": 14,
+    "recovery_cycles": 0,
+    "total_time_s": 33.703,
+    "prompt_tokens": 1634,
+    "completion_tokens": 1191,
+    "total_tokens": 2825,
+    "cost_usd": 0.00064,
+    "a2a_messages": 0,
+    "tool_calls": 5,
+    "is_estimated": false,
+    "error": null,
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 19.2491,
+        "tokens": 1212,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.9374,
+        "tokens": 1613,
+        "llm_calls": 1
+      }
+    ],
+    "excluded_from_stats": false,
+    "earlier_attempts": []
+  },
+  {
+    "task_id": "T3",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-7c2977fa",
+    "success": true,
+    "tests_passed": 7,
+    "tests_total": 7,
+    "recovery_cycles": 0,
+    "total_time_s": 47.532,
+    "prompt_tokens": 3559,
+    "completion_tokens": 2097,
+    "total_tokens": 5656,
+    "cost_usd": 0.001195,
+    "a2a_messages": 12,
+    "tool_calls": 12,
+    "is_estimated": false,
+    "error": null,
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.125,
+        "tokens": 0,
+        "llm_calls": 0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.1539,
+        "tokens": 0,
+        "llm_calls": 0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 18.1908,
+        "tokens": 2844,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 13.9583,
+        "tokens": 1416,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 10.8677,
+        "tokens": 1396,
+        "llm_calls": 1
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.005,
+        "tokens": 0,
+        "llm_calls": 0
+      }
+    ],
+    "excluded_from_stats": false,
+    "earlier_attempts": []
+  },
+  {
+    "task_id": "T3",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "success": false,
+    "error": "LLMQuotaExhaustedError: GoogleADK:CoderAgent: LLM quota exhausted: \nOn how to mitigate this issue, please refer to:\n\nhttps://google.github.io/adk-docs/agents/models/google-gemini/#error-code-429-resource_exhausted\n\n\n429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'me",
+    "total_time_s": 20.7,
+    "excluded_from_stats": true,
+    "earlier_attempts": [
+      {
+        "error": "LLMQuotaExhaustedError: GoogleADK:TestGeneratorAgent: LLM quota exhausted: \nOn how to mitigate this issue, please refer to:\n\nhttps://google.github.io/adk-docs/a",
+        "run_id": null
+      }
+    ]
+  },
+  {
+    "task_id": "T3",
+    "arch": "C3",
+    "architecture": "Critic-Reflection-Loop",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-REFL-01e1868d",
+    "success": true,
+    "tests_passed": 15,
+    "tests_total": 15,
+    "recovery_cycles": 0,
+    "total_time_s": 28.407,
+    "prompt_tokens": 1672,
+    "completion_tokens": 1366,
+    "total_tokens": 3038,
+    "cost_usd": 0.000714,
+    "a2a_messages": 0,
+    "tool_calls": 5,
+    "is_estimated": false,
+    "error": null,
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 11.854,
+        "tokens": 1253,
+        "llm_calls": 1
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 12.2761,
+        "tokens": 1785,
+        "llm_calls": 1
+      }
+    ],
+    "excluded_from_stats": false,
+    "earlier_attempts": []
+  }
+]

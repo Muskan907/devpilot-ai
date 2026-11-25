@@ -1,0 +1,25 @@
+# Secrets: never upload (set as cloud secrets instead)
+.env
+.env.*
+!.env.example
+
+# Local virtual environments (rebuilt inside the image)
+.venv
+.venv_*
+venv
+
+# Caches
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+
+# Regenerated at runtime
+sandbox_workspace/runs
+sandbox_workspace/chroma_db
+sandbox_workspace/temp
+
+# Not needed in the image
+.git
+.gitignore
+*.log
+Agentic_AI_Synopsis_Phase1.pdf

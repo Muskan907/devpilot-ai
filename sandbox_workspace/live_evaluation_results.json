@@ -1,0 +1,4234 @@
+[
+  {
+    "task_id": "T1",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-6d5b316a",
+    "success": true,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "recovery_cycles": 0,
+    "total_time_s": 39.025,
+    "prompt_tokens": 4121,
+    "completion_tokens": 3065,
+    "total_tokens": 7186,
+    "cost_usd": 0.001637,
+    "a2a_messages": 4,
+    "tool_calls": 4,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 1.1152,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.1449,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 13.401,
+        "tokens": 3582,
+        "llm_calls": 1,
+        "cost_usd": 0.000888
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 11.5199,
+        "tokens": 1913,
+        "llm_calls": 1,
+        "cost_usd": 0.000382
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 10.4564,
+        "tokens": 1691,
+        "llm_calls": 1,
+        "cost_usd": 0.000367
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0028,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1 through AC-4) completely, specifically, and testably cover population vs. sample standard deviation, empty list error handling, and insufficient values error handling for sample=True."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly computes both population (n) and sample (n-1) standard deviations, handles edge cases cleanly, and raises ValueError as required for empty lists and single-element sample lists."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is extremely minimal, well-documented with a docstring, adheres to Python typing conventions used in the file, and integrates seamlessly into AdvancedCalculator."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests explicitly check all acceptance criteria: default population calculation, explicit population calculation, population edge cases (single/identical elements), sample calculation, empty list exceptions, and insufficient values exceptions for sample=True."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T1",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-11e13bb0",
+    "success": true,
+    "tests_passed": 11,
+    "tests_total": 11,
+    "recovery_cycles": 0,
+    "total_time_s": 25.553,
+    "prompt_tokens": 1488,
+    "completion_tokens": 1170,
+    "total_tokens": 2658,
+    "cost_usd": 0.000617,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 100.0,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 12.701,
+        "tokens": 1068,
+        "llm_calls": 1,
+        "cost_usd": 0.000259
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 11.0628,
+        "tokens": 1590,
+        "llm_calls": 1,
+        "cost_usd": 0.000358
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "No specific planner acceptance criteria were provided in the prompt, but the planning step implicitly adopted the standard requirement embedded in the calculator codebase comment for implementing 'standard_deviation'."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation of standard_deviation correctly handles both population (sample=False) and sample (sample=True) standard deviations, raises appropriate ValueError exceptions for empty lists and single-element sample requests, and passes all objective tests successfully."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-documented with a detailed docstring, uses appropriate type hints, and strictly follows the style and structure of the existing calculator class."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated test suite thoroughly tests population and sample standard deviation, single-item population edge cases, zero-variance lists, empty list errors for both modes, sample error cases with fewer than two values, and includes extra utility test methods."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T1",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-f7a90a54",
+    "success": true,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "recovery_cycles": 0,
+    "total_time_s": 32.364,
+    "prompt_tokens": 4181,
+    "completion_tokens": 2797,
+    "total_tokens": 6978,
+    "cost_usd": 0.001537,
+    "a2a_messages": 3,
+    "tool_calls": 6,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 10.2957,
+        "tokens": 3299,
+        "llm_calls": 1,
+        "cost_usd": 0.000775
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 10.5114,
+        "tokens": 1803,
+        "llm_calls": 1,
+        "cost_usd": 0.000331
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.6585,
+        "tokens": 1876,
+        "llm_calls": 1,
+        "cost_usd": 0.000431
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria produced by the Planner explicitly map to all requirements (population vs. sample calculation, handling empty list, and handling sample=True with fewer than two values)."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly calculates both population and sample standard deviation, handles the empty list check raising ValueError, and handles the sample=True with len < 2 check raising ValueError."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-typed, uses existing class methods like self.mean(), includes appropriate docstrings, and follows the existing style of src/calculator.py."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests thoroughly verify AC-1 through AC-4, testing both default and explicit parameters, single-element population lists, multi-element sample lists, and both required ValueError error paths."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T2",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-2f9fdbb0",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 31.032,
+    "prompt_tokens": 3550,
+    "completion_tokens": 2286,
+    "total_tokens": 5836,
+    "cost_usd": 0.001269,
+    "a2a_messages": 4,
+    "tool_calls": 10,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.872,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.0595,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 9.9325,
+        "tokens": 3025,
+        "llm_calls": 1,
+        "cost_usd": 0.00074
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 10.4604,
+        "tokens": 1466,
+        "llm_calls": 1,
+        "cost_usd": 0.00028
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 7.3973,
+        "tokens": 1345,
+        "llm_calls": 1,
+        "cost_usd": 0.000249
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0017,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly cover the requirement of implementing a median method for empty, odd-length, and even-length lists."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks for empty lists (raising ValueError), sorts the input numbers to find the correct middle index, handles odd lengths, and averages the two middle values for even lengths."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-documented with docstrings, type-hinted appropriately, and follows the style conventions of the existing codebase."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests explicitly verify every acceptance criterion (AC-1, AC-2, AC-3), including boundary cases (single element, two elements) and mixed types/signs (negative numbers, floats, unsorted inputs)."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T2",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-a27421fb",
+    "success": true,
+    "tests_passed": 15,
+    "tests_total": 15,
+    "recovery_cycles": 0,
+    "total_time_s": 24.827,
+    "prompt_tokens": 1691,
+    "completion_tokens": 1420,
+    "total_tokens": 3111,
+    "cost_usd": 0.000737,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 65.96,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 11.7353,
+        "tokens": 1262,
+        "llm_calls": 1,
+        "cost_usd": 0.000336
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 11.3022,
+        "tokens": 1849,
+        "llm_calls": 1,
+        "cost_usd": 0.000401
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 3,
+        "justification": "No acceptance criteria were produced by the Planner (none listed), but the implementation and tests successfully addressed a standard extension to the calculator (adding the median function and comprehensive test coverage)."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The median implementation correctly handles odd lengths, even lengths, unsorted lists, single elements, negative numbers, and raises a ValueError on empty lists as evidenced by passing tests and code correctness."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-documented with docstrings, follows the exact style of the existing class, and includes robust built-in unit tests alongside the separate test suite."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers odd/even length lists, single elements, duplicate elements, negative numbers, floats, and empty list exceptions thoroughly using pytest."
+      },
+      "diagnosis_quality": null,
+      "overall": 4.5,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T2",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-a5dc5bd2",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 28.183,
+    "prompt_tokens": 3537,
+    "completion_tokens": 2069,
+    "total_tokens": 5606,
+    "cost_usd": 0.001182,
+    "a2a_messages": 3,
+    "tool_calls": 12,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 7.7907,
+        "tokens": 2814,
+        "llm_calls": 1,
+        "cost_usd": 0.000656
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 12.2007,
+        "tokens": 1419,
+        "llm_calls": 1,
+        "cost_usd": 0.000263
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 6.3226,
+        "tokens": 1373,
+        "llm_calls": 1,
+        "cost_usd": 0.000263
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly capture odd-length lists, even-length lists, and the empty list ValueError edge case specified in the requirement."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly handles sorting, odd-length middle value retrieval, even-length middle average calculation, and raises a ValueError on empty lists as required."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The change is clean, well-typed, includes appropriate docstrings, uses standard library sorting efficiently, and follows the existing codebase style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The tests cover all acceptance criteria explicitly (odd-length, even-length, empty list), including single elements, unsorted lists, mixed types (floats/ints), and negative numbers."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T3",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-d5da9033",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 29.462,
+    "prompt_tokens": 3546,
+    "completion_tokens": 2162,
+    "total_tokens": 5708,
+    "cost_usd": 0.001219,
+    "a2a_messages": 4,
+    "tool_calls": 16,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.0,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8959,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.0467,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 10.9983,
+        "tokens": 2906,
+        "llm_calls": 1,
+        "cost_usd": 0.000685
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 7.1547,
+        "tokens": 1404,
+        "llm_calls": 1,
+        "cost_usd": 0.00025
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 8.1417,
+        "tokens": 1398,
+        "llm_calls": 1,
+        "cost_usd": 0.000284
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0019,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The planner defined explicit acceptance criteria (AC-1 and AC-2) that precisely cover the requirements of calculating the percentage rounded to 2 decimal places and raising a ValueError when whole is 0."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly calculates (part / whole) * 100, rounds to 2 decimal places using round(), and checks `if whole == 0:` to raise a ValueError, completely satisfying AC-1 and AC-2."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, follows existing style guidelines, includes appropriate type hints, and provides a clear docstring."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests cover valid cases with repeating decimals, zero parts, parts greater than wholes, negative numbers, and explicitly check zero division for both integers and floats against AC-1 and AC-2. All tests pass successfully."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T3",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-faff1692",
+    "success": true,
+    "tests_passed": 12,
+    "tests_total": 12,
+    "recovery_cycles": 0,
+    "total_time_s": 21.305,
+    "prompt_tokens": 1571,
+    "completion_tokens": 1328,
+    "total_tokens": 2899,
+    "cost_usd": 0.000688,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 68.42,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 10.2765,
+        "tokens": 1153,
+        "llm_calls": 1,
+        "cost_usd": 0.000292
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.2482,
+        "tokens": 1746,
+        "llm_calls": 1,
+        "cost_usd": 0.000396
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 3,
+        "justification": "No planner acceptance criteria were explicitly produced by the planner (listed as '(none)'), but the implementation cleanly addresses the implied feature in the codebase comment ('safe_percentage')."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The `safe_percentage` method correctly computes the percentage, rounds to 2 decimal places, and properly raises a `ValueError` when `whole` is 0."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-documented with docstrings, includes type hints, and follows the existing conventions of the `AdvancedCalculator` class."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests thoroughly cover valid calculations, rounding, negative inputs, zero-whole error conditions, as well as testing other methods like power, mean, and divide."
+      },
+      "diagnosis_quality": null,
+      "overall": 4.5,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T1",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-4dcd7c6c",
+    "success": true,
+    "tests_passed": 13,
+    "tests_total": 13,
+    "recovery_cycles": 0,
+    "total_time_s": 62.794,
+    "prompt_tokens": 4349,
+    "completion_tokens": 1891,
+    "total_tokens": 6240,
+    "cost_usd": 0.000915,
+    "a2a_messages": 4,
+    "tool_calls": 4,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 97.06,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.9231,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 8.9191,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 8.8251,
+        "tokens": 2825,
+        "llm_calls": 1,
+        "cost_usd": 0.000529
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 25.0356,
+        "tokens": 1707,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 16.7028,
+        "tokens": 1708,
+        "llm_calls": 1,
+        "cost_usd": 0.000386
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0018,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+  },
+  {
+    "task_id": "T2",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-4c4ece5d",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 1,
+    "total_time_s": 59.309,
+    "prompt_tokens": 7594,
+    "completion_tokens": 3519,
+    "total_tokens": 11113,
+    "cost_usd": 0.001865,
+    "a2a_messages": 4,
+    "tool_calls": 8,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.55,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [
+      "request_code_fix"
+    ],
+    "diagnoses": [
+      "incorrect_logic"
+    ],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8831,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 5.1188,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 14.1466,
+        "tokens": 3675,
+        "llm_calls": 1,
+        "cost_usd": 0.000869
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 6.7697,
+        "tokens": 1747,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.8998,
+        "tokens": 1381,
+        "llm_calls": 1,
+        "cost_usd": 0.000242
+      },
+      {
+        "agent": "GoogleADK:DebuggerAgent",
+        "latency_s": 12.1195,
+        "tokens": 2826,
+        "llm_calls": 1,
+        "cost_usd": 0.000416
+      },
+      {
+        "agent": "CrewAI:ManagerAgent",
+        "latency_s": 5.6518,
+        "tokens": 1484,
+        "llm_calls": 1,
+        "cost_usd": 0.000338
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0039,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly capture all requirements: empty list raises ValueError, odd-length lists return the middle element, and even-length lists return the average of the two middle elements."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The code correctly implements the median method inside AdvancedCalculator, handles the empty list check raising ValueError, sorts the array, and correctly computes the median for both odd and even lengths."
+      },
+      "code_quality": {
+        "score": 4,
+        "justification": "The implementation is clean and concise. However, `import math` was added at the top of src/calculator.py but is not actually used anywhere in the diff, which is a minor unused import."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite in `tests/test_devpilot_generated.py` thoroughly covers every acceptance criterion: AC-1 is tested via `test_median_empty_list_raises_valueerror`, AC-2 via `test_median_odd_length_list` (single elements, sorted/unsorted lists, floats/negatives), and AC-3 via `test_median_even_length_list`."
+      },
+      "diagnosis_quality": {
+        "score": 5,
+        "justification": "The failure diagnosis correctly identified issues in a previous/alternative iteration (lack of empty-list validation, module-level test runner code, missing math import) which were successfully addressed in the final code."
+      },
+      "overall": 4.8,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T3",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-80b7eab6",
+    "success": true,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "recovery_cycles": 0,
+    "total_time_s": 29.055,
+    "prompt_tokens": 3561,
+    "completion_tokens": 2186,
+    "total_tokens": 5747,
+    "cost_usd": 0.001231,
+    "a2a_messages": 3,
+    "tool_calls": 10,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.0,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 8.9371,
+        "tokens": 2791,
+        "llm_calls": 1,
+        "cost_usd": 0.000639
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 8.5889,
+        "tokens": 1445,
+        "llm_calls": 1,
+        "cost_usd": 0.000266
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.4745,
+        "tokens": 1511,
+        "llm_calls": 1,
+        "cost_usd": 0.000326
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1 and AC-2) directly, completely, and specifically capture the requirements to implement `safe_percentage(part, whole)` with proper computation, rounding to 2 decimals, and raising a ValueError on zero denominator."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation in `src/calculator.py` correctly guards against zero division (`if whole == 0: raise ValueError(...)`) and computes `round((part / whole) * 100, 2)` satisfying both acceptance criteria."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, type-hinted appropriately (`part: float, whole: float`), includes a clear docstring detailing arguments, return values, and raised exceptions, and blends seamlessly with the existing codebase style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite in `tests/test_devpilot_generated.py` thoroughly verifies AC-1 and AC-2, covering standard valid inputs, rounding precision, zero parts, negative values, float inputs, and zero denominators (both integer and float 0.0)."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T3",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-aff88f9a",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 30.531,
+    "prompt_tokens": 4349,
+    "completion_tokens": 1758,
+    "total_tokens": 6107,
+    "cost_usd": 0.000866,
+    "a2a_messages": 4,
+    "tool_calls": 14,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.0,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8711,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 5.1906,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 8.1793,
+        "tokens": 3016,
+        "llm_calls": 1,
+        "cost_usd": 0.000612
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 6.0015,
+        "tokens": 1707,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 8.0353,
+        "tokens": 1384,
+        "llm_calls": 1,
+        "cost_usd": 0.000254
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0017,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely cover the requested feature: method signature, calculation with rounding, zero-division error handling, and exact expected example values."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks for whole == 0, raises ValueError, and computes (part / whole) * 100 rounded to 2 decimal places using Python's round function."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, properly typed with Union[int, float], correctly placed in the AdvancedCalculator class, and matches existing style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers all acceptance criteria, tests example cases (1, 3 -> 33.33 and 50, 200 -> 25.0), handles negative numbers and floats, and verifies ValueError for both integer and float zero divisors."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T4",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-076c6ae8",
+    "success": true,
+    "tests_passed": 13,
+    "tests_total": 13,
+    "recovery_cycles": 0,
+    "total_time_s": 40.809,
+    "prompt_tokens": 4137,
+    "completion_tokens": 2777,
+    "total_tokens": 6914,
+    "cost_usd": 0.001524,
+    "a2a_messages": 4,
+    "tool_calls": 4,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8703,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.0983,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 10.421,
+        "tokens": 3302,
+        "llm_calls": 1,
+        "cost_usd": 0.000777
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 12.3752,
+        "tokens": 1752,
+        "llm_calls": 1,
+        "cost_usd": 0.000315
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 14.3564,
+        "tokens": 1860,
+        "llm_calls": 1,
+        "cost_usd": 0.000432
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0048,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely mirror the requirements: AC-1 covers population variance, AC-2 covers sample variance for lists with >= 2 elements, and AC-3 covers the ValueError for empty lists."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly calculates population and sample variance, utilizes the existing mean method, properly handles the $N-1$ denominator for sample variance, and raises ValueError for empty lists as well as sample=True with fewer than 2 elements."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, well-documented with docstrings and type hints, and follows the prevailing style of AdvancedCalculator."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests comprehensively cover all three acceptance criteria, testing default population variance, explicit population variance, single-element lists, floats, negatives, sample variance, two-element boundary cases, and exceptions for empty lists or insufficient elements under sample=True."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T4",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-b6491f51",
+    "success": true,
+    "tests_passed": 14,
+    "tests_total": 14,
+    "recovery_cycles": 0,
+    "total_time_s": 28.396,
+    "prompt_tokens": 1517,
+    "completion_tokens": 1145,
+    "total_tokens": 2662,
+    "cost_usd": 0.00061,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 100.0,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 12.3311,
+        "tokens": 1087,
+        "llm_calls": 1,
+        "cost_usd": 0.000267
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 14.2115,
+        "tokens": 1575,
+        "llm_calls": 1,
+        "cost_usd": 0.000343
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 3,
+        "justification": "No explicit acceptance criteria were produced by the Planner (listed as '(none)'). However, the implementation successfully inferred and built the variance feature based on standard math definitions and library conventions."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation of `variance` correctly handles both population and sample variance, includes proper type hints, leverages the existing `mean` method, and correctly raises `ValueError` on empty lists or sample variance with fewer than 2 elements."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, well-documented with a docstring, and matches the formatting and style of the existing `AdvancedCalculator` class."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers population and sample variance, empty list checks, single-element edge cases for both sample and population, negative/float inputs, and includes other regression/utility tests."
+      },
+      "diagnosis_quality": null,
+      "overall": 4.5,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T4",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-afbe3d1c",
+    "success": true,
+    "tests_passed": 13,
+    "tests_total": 13,
+    "recovery_cycles": 0,
+    "total_time_s": 137.039,
+    "prompt_tokens": 4123,
+    "completion_tokens": 2679,
+    "total_tokens": 6802,
+    "cost_usd": 0.001484,
+    "a2a_messages": 3,
+    "tool_calls": 6,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.55,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 63.4204,
+        "tokens": 3119,
+        "llm_calls": 1,
+        "cost_usd": 0.000704
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 32.9811,
+        "tokens": 1777,
+        "llm_calls": 1,
+        "cost_usd": 0.00033
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 38.7387,
+        "tokens": 1906,
+        "llm_calls": 1,
+        "cost_usd": 0.00045
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely cover population variance (AC-1), sample variance (AC-2), and the empty list ValueError condition (AC-3), mapping directly to the requirement."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly computes both population and sample variance using helper methods like `self.mean`, and appropriately handles edge cases such as raising a ValueError for empty lists and single-element lists when `sample=True`."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-typed, includes a clear docstring detailing arguments and exceptions, and adheres to the existing codebase style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers all acceptance criteria (AC-1, AC-2, AC-3) along with important boundary cases (single-element population variance, N=2 sample variance, empty list checks, sample variance with 1 element raising ValueError, and identical elements)."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T4",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-b2ee8b59",
+    "success": true,
+    "tests_passed": 11,
+    "tests_total": 11,
+    "recovery_cycles": 1,
+    "total_time_s": 91.702,
+    "prompt_tokens": 8207,
+    "completion_tokens": 4230,
+    "total_tokens": 12437,
+    "cost_usd": 0.002087,
+    "a2a_messages": 4,
+    "tool_calls": 10,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 97.06,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [
+      "request_code_fix"
+    ],
+    "diagnoses": [
+      "missing_import"
+    ],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8614,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 6.4805,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 13.8823,
+        "tokens": 3970,
+        "llm_calls": 1,
+        "cost_usd": 0.000937
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 22.7129,
+        "tokens": 2193,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 11.2934,
+        "tokens": 1494,
+        "llm_calls": 1,
+        "cost_usd": 0.000306
+      },
+      {
+        "agent": "GoogleADK:DebuggerAgent",
+        "latency_s": 21.1343,
+        "tokens": 3145,
+        "llm_calls": 1,
+        "cost_usd": 0.000446
+      },
+      {
+        "agent": "CrewAI:ManagerAgent",
+        "latency_s": 11.6993,
+        "tokens": 1635,
+        "llm_calls": 1,
+        "cost_usd": 0.000398
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0019,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1 through AC-4) clearly specify population variance, sample variance, empty list ValueError handling, and unit test coverage, completely capturing the requirements."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly uses numpy with appropriate `ddof=1` for sample variance and `ddof=0` for population variance, and properly raises a `ValueError` for empty lists using `if not numbers:`."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, removes a problematic test-dependency import from production code, and handles types cleanly with appropriate return casting to float."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The unit tests cover population variance (both default and explicit), sample variance, empty list exception handling under both sample modes, and edge cases like floats and negative numbers."
+      },
+      "diagnosis_quality": {
+        "score": 5,
+        "justification": "The diagnosis correctly identified both issues in the pre-existing code: the ModuleNotFoundError caused by importing a non-existent test file into calculator.py, and the incorrect use of `assert` instead of raising `ValueError` for empty lists."
+      },
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T5",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-4a44d97b",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 40.498,
+    "prompt_tokens": 4066,
+    "completion_tokens": 2340,
+    "total_tokens": 6406,
+    "cost_usd": 0.001342,
+    "a2a_messages": 4,
+    "tool_calls": 24,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.3,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.333
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.9061,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.0848,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 17.4514,
+        "tokens": 3309,
+        "llm_calls": 1,
+        "cost_usd": 0.000784
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 13.2877,
+        "tokens": 1725,
+        "llm_calls": 1,
+        "cost_usd": 0.000307
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 6.2357,
+        "tokens": 1372,
+        "llm_calls": 1,
+        "cost_usd": 0.000251
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0021,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+  },
+  {
+    "task_id": "T5",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-1f01f345",
+    "success": true,
+    "tests_passed": 14,
+    "tests_total": 14,
+    "recovery_cycles": 0,
+    "total_time_s": 26.722,
+    "prompt_tokens": 1429,
+    "completion_tokens": 984,
+    "total_tokens": 2413,
+    "cost_usd": 0.000537,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 100.0,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 13.5916,
+        "tokens": 1007,
+        "llm_calls": 1,
+        "cost_usd": 0.000236
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 11.3808,
+        "tokens": 1406,
+        "llm_calls": 1,
+        "cost_usd": 0.000301
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 3,
+        "justification": "No explicit acceptance criteria were produced by the Planner (listed as '(none)'). However, the implementation successfully inferred the requirement for adding a factorial method from the surrounding context and existing test patterns."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation of `factorial` correctly handles non-negative integers, guards against negative integers, floats, strings, and booleans (which are a subclass of int in Python) using `isinstance(n, bool) or not isinstance(n, int)`, and utilizes `math.factorial` correctly."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-documented with a docstring matching the style of the rest of the class, uses appropriate type hints, and cleanly handles edge cases and errors."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests comprehensively cover zero, positive integers, negative integers, non-integers (floats, strings), and booleans, ensuring all error paths and valid calculation paths for `factorial` (as well as additional helper/power tests) are thoroughly tested. All 14 tests pass successfully."
+      },
+      "diagnosis_quality": null,
+      "overall": 4.5,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T5",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-6e218ef7",
+    "success": true,
+    "tests_passed": 18,
+    "tests_total": 18,
+    "recovery_cycles": 0,
+    "total_time_s": 26.943,
+    "prompt_tokens": 3972,
+    "completion_tokens": 1818,
+    "total_tokens": 5790,
+    "cost_usd": 0.001125,
+    "a2a_messages": 3,
+    "tool_calls": 66,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.3,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.333
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 7.396,
+        "tokens": 2859,
+        "llm_calls": 1,
+        "cost_usd": 0.000604
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 9.6155,
+        "tokens": 1624,
+        "llm_calls": 1,
+        "cost_usd": 0.000275
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 8.0815,
+        "tokens": 1307,
+        "llm_calls": 1,
+        "cost_usd": 0.000246
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely map to the requirements, covering non-negative integers (including 0), negative integers, and non-integer/invalid types with expected ValueError handling."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks for booleans and non-integers (isinstance(n, bool) or not isinstance(n, int)), checks for negative numbers, and delegates to math.factorial(n) which handles non-negative integer computation properly."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, well-documented with docstrings, type-hinted, and matches the existing codebase style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests thoroughly test all acceptance criteria (AC-1, AC-2, AC-3) including comprehensive edge cases like 0, negative integers, floats, strings, booleans, and collection types."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T5",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-7c405fa9",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 50.245,
+    "prompt_tokens": 3772,
+    "completion_tokens": 1579,
+    "total_tokens": 5351,
+    "cost_usd": 0.000781,
+    "a2a_messages": 4,
+    "tool_calls": 92,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.55,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.9151,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 6.5387,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 8.4681,
+        "tokens": 2732,
+        "llm_calls": 1,
+        "cost_usd": 0.000574
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 18.5071,
+        "tokens": 1412,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 13.4572,
+        "tokens": 1207,
+        "llm_calls": 1,
+        "cost_usd": 0.000207
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0017,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly capture all facets of the requirements, covering correct values for non-negative integers, ValueError for negative numbers, and ValueError for non-integer inputs (floats, strings)."
+      },
+      "code_correctness": {
+        "score": 4,
+        "justification": "The implementation correctly computes the factorial recursively and validates negative numbers. However, `isinstance(n, float) and not n.is_integer()` has a minor bug/limitation: if `n` is passed as a string (e.g. 'abc'), `n < 0` will raise a TypeError instead of a ValueError, and `isinstance(n, float)` will be False, meaning strings bypass the float check. In Python, type annotations say `int`, but dynamic types can be passed."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, readable, properly typed with type hints, and integrates smoothly into the AdvancedCalculator class."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite comprehensively covers all acceptance criteria: valid non-negative integers (AC-1), negative integers (AC-2), and non-integer inputs like floats and strings (AC-3)."
+      },
+      "diagnosis_quality": null,
+      "overall": 4.75,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T6",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-2769902e",
+    "success": true,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "recovery_cycles": 0,
+    "total_time_s": 23.873,
+    "prompt_tokens": 3529,
+    "completion_tokens": 1589,
+    "total_tokens": 5118,
+    "cost_usd": 0.000989,
+    "a2a_messages": 4,
+    "tool_calls": 116,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.0,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8963,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.127,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 6.5388,
+        "tokens": 2348,
+        "llm_calls": 1,
+        "cost_usd": 0.000466
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 5.9686,
+        "tokens": 1432,
+        "llm_calls": 1,
+        "cost_usd": 0.000267
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 7.9277,
+        "tokens": 1338,
+        "llm_calls": 1,
+        "cost_usd": 0.000256
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.002,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely capture both requirements: AC-1 covers valid inputs returning a % b, and AC-2 covers the specific ZeroDivisionError and message for modulo by zero."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks for b == 0, raises the expected ZeroDivisionError with the exact message 'Cannot take modulo by zero', and returns a % b otherwise."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, well-documented with a docstring matching existing patterns, and correctly typed with float annotations."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests thoroughly cover AC-1 and AC-2, including integers, floating-point numbers, negative numbers, and both integer and float zero division with precise message matching."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T6",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-3bbea76e",
+    "success": true,
+    "tests_passed": 16,
+    "tests_total": 16,
+    "recovery_cycles": 0,
+    "total_time_s": 19.968,
+    "prompt_tokens": 1359,
+    "completion_tokens": 1029,
+    "total_tokens": 2388,
+    "cost_usd": 0.000547,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 100.0,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 8.6878,
+        "tokens": 928,
+        "llm_calls": 1,
+        "cost_usd": 0.000202
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.255,
+        "tokens": 1460,
+        "llm_calls": 1,
+        "cost_usd": 0.000345
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "Although the planner produced no explicit acceptance criteria text in the prompt, the requirements were inherently clear (adding a modulo method with zero-division handling), and the resulting implementation and tests fully capture the necessary behavior."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The `modulo` method correctly implements the modulo operation using Python's `%` operator and properly checks for `b == 0` to raise a `ZeroDivisionError` with an informative message matching existing division error handling conventions in `src/calculator.py`."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is extremely minimal, well-typed (`a: float, b: float) -> float`), includes docstrings, and strictly adheres to the style and structure of the surrounding class `AdvancedCalculator`."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests in `test_devpilot_generated.py` comprehensively cover positive values, float operations, and the modulo-by-zero edge case (`test_modulo_positive_and_floats`, `test_modulo_by_zero`), alongside thorough regression coverage for other calculator functions."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T6",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-63942d9f",
+    "success": true,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "recovery_cycles": 0,
+    "total_time_s": 28.234,
+    "prompt_tokens": 3515,
+    "completion_tokens": 2055,
+    "total_tokens": 5570,
+    "cost_usd": 0.001174,
+    "a2a_messages": 3,
+    "tool_calls": 158,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.0,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 10.2153,
+        "tokens": 2819,
+        "llm_calls": 1,
+        "cost_usd": 0.000654
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 9.451,
+        "tokens": 1421,
+        "llm_calls": 1,
+        "cost_usd": 0.000261
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 6.341,
+        "tokens": 1330,
+        "llm_calls": 1,
+        "cost_usd": 0.000259
+      }
+    ],
+    "judge_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+  },
+  {
+    "task_id": "T6",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-1afc03d0",
+    "success": true,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "recovery_cycles": 0,
+    "total_time_s": 84.265,
+    "prompt_tokens": 4212,
+    "completion_tokens": 1705,
+    "total_tokens": 5917,
+    "cost_usd": 0.000849,
+    "a2a_messages": 4,
+    "tool_calls": 184,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.3,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 1.0191,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 6.5235,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 56.1005,
+        "tokens": 2849,
+        "llm_calls": 1,
+        "cost_usd": 0.000546
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 7.4314,
+        "tokens": 1629,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 10.8468,
+        "tokens": 1439,
+        "llm_calls": 1,
+        "cost_usd": 0.000303
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0026,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+  },
+  {
+    "task_id": "T7",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-b6e140ce",
+    "success": true,
+    "tests_passed": 11,
+    "tests_total": 11,
+    "recovery_cycles": 1,
+    "total_time_s": 57.521,
+    "prompt_tokens": 6808,
+    "completion_tokens": 4454,
+    "total_tokens": 11262,
+    "cost_usd": 0.002463,
+    "a2a_messages": 4,
+    "tool_calls": 36,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.0,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [
+      "request_test_fix"
+    ],
+    "diagnoses": [
+      "broken_test"
+    ],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8863,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.0937,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 16.4622,
+        "tokens": 3119,
+        "llm_calls": 1,
+        "cost_usd": 0.000797
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 8.9457,
+        "tokens": 1371,
+        "llm_calls": 1,
+        "cost_usd": 0.000266
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.3673,
+        "tokens": 1782,
+        "llm_calls": 1,
+        "cost_usd": 0.00043
+      },
+      {
+        "agent": "GoogleADK:DebuggerAgent",
+        "latency_s": 12.6899,
+        "tokens": 3487,
+        "llm_calls": 1,
+        "cost_usd": 0.000646
+      },
+      {
+        "agent": "CrewAI:ManagerAgent",
+        "latency_s": 5.6477,
+        "tokens": 1503,
+        "llm_calls": 1,
+        "cost_usd": 0.000324
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0023,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The planner produced acceptance criteria AC-1 and AC-2 that perfectly mirror the requirements, specifying the exact formula, rounding, and negative input error handling."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation in `src/calculator.py` correctly calculates compound interest using `principal * ((1 + rate) ** years)`, rounds to 2 decimal places using `round(..., 2)`, and explicitly raises a `ValueError` if either `principal` or `years` is negative."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is minimal, cleanly documented with docstrings, and follows the existing class style and formatting conventions of `AdvancedCalculator`."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests cover standard calculations, fractional years/rates, and edge cases like negative principal raising `ValueError` (as seen in the test diff patch and 11/11 passing tests)."
+      },
+      "diagnosis_quality": {
+        "score": 5,
+        "justification": "The failure diagnosis accurately identified a math mismatch in the test expectation (1063.86 vs 1063.68) for `1000 * (1 + 0.025) ** 2.5` and provided the correct expected value."
+      },
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T7",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-98200533",
+    "success": false,
+    "tests_passed": 20,
+    "tests_total": 22,
+    "recovery_cycles": 0,
+    "total_time_s": 33.804,
+    "prompt_tokens": 1799,
+    "completion_tokens": 1574,
+    "total_tokens": 3373,
+    "cost_usd": 0.000809,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": "Sequential single pass failed: tests_all_passed=False, regressions=0, audit_passed=True",
+    "regressions": [],
+    "coverage_percent": 75.51,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 18.3754,
+        "tokens": 1385,
+        "llm_calls": 1,
+        "cost_usd": 0.000384
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 13.4723,
+        "tokens": 1988,
+        "llm_calls": 1,
+        "cost_usd": 0.000425
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 3,
+        "justification": "No acceptance criteria were explicitly produced by the Planner (listed as '(none)'), but the implementation correctly inferred and implemented the standard compound interest feature along with clear docstrings and error raising."
+      },
+      "code_correctness": {
+        "score": 4,
+        "justification": "The compound_interest implementation correctly handles the calculation, rounds to 2 decimal places, and raises ValueErrors for negative principal or years. However, the objective test results show 20/22 passed, indicating some minor edge case or test mismatch in the wider suite."
+      },
+      "code_quality": {
+        "score": 4,
+        "justification": "The code change is clean, well-typed, properly documented, and includes unit tests. However, mixing unittest definitions directly inside the calculator module (lines 59-83 in src/calculator.py) is a bit unconventional given pytest is also used."
+      },
+      "test_adequacy": {
+        "score": 4,
+        "justification": "Comprehensive tests were written covering standard cases, zero/negative rates, fractional years, and exception handling for negative inputs."
+      },
+      "diagnosis_quality": null,
+      "overall": 3.75,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T7",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-29962272",
+    "success": true,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "recovery_cycles": 0,
+    "total_time_s": 32.474,
+    "prompt_tokens": 3427,
+    "completion_tokens": 2593,
+    "total_tokens": 6020,
+    "cost_usd": 0.00138,
+    "a2a_messages": 3,
+    "tool_calls": 78,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.3,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 9.0582,
+        "tokens": 2831,
+        "llm_calls": 1,
+        "cost_usd": 0.000682
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 9.4862,
+        "tokens": 1365,
+        "llm_calls": 1,
+        "cost_usd": 0.00026
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 11.9565,
+        "tokens": 1824,
+        "llm_calls": 1,
+        "cost_usd": 0.000438
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely mirror the requirements, defining correct calculation with rounding to 2 decimal places (AC-1) and appropriate ValueError handling for negative principal (AC-2) and negative years (AC-3)."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The compound_interest method correctly computes principal * (1 + rate) ** years, rounds to 2 decimals using round(), and checks for negative values of principal and years, raising a ValueError as requested."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The implementation is minimal, clean, well-documented with a docstring, fully typed, and fits seamlessly into the existing AdvancedCalculator class structure."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite comprehensively tests AC-1 through AC-3, covering standard calculations, multi-year rounding scenarios, boundary values (zero principal, rate, years, fractional years), and error handling for negative inputs."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T7",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-5a03c739",
+    "success": true,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "recovery_cycles": 1,
+    "total_time_s": 71.092,
+    "prompt_tokens": 7027,
+    "completion_tokens": 3495,
+    "total_tokens": 10522,
+    "cost_usd": 0.001828,
+    "a2a_messages": 4,
+    "tool_calls": 116,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.3,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.333
+    },
+    "manager_decisions": [
+      "request_code_fix"
+    ],
+    "diagnoses": [
+      "missing_import"
+    ],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 1.0601,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 6.6087,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 9.8655,
+        "tokens": 3041,
+        "llm_calls": 1,
+        "cost_usd": 0.000702
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 16.4048,
+        "tokens": 1495,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 14.9963,
+        "tokens": 1647,
+        "llm_calls": 1,
+        "cost_usd": 0.000348
+      },
+      {
+        "agent": "GoogleADK:DebuggerAgent",
+        "latency_s": 12.3278,
+        "tokens": 2745,
+        "llm_calls": 1,
+        "cost_usd": 0.000395
+      },
+      {
+        "agent": "CrewAI:ManagerAgent",
+        "latency_s": 6.1926,
+        "tokens": 1594,
+        "llm_calls": 1,
+        "cost_usd": 0.000383
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0019,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly capture all requirements: correct formula application with 2 decimal rounding for valid inputs, and raising ValueError for negative principal or negative years."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly validates that principal and years are non-negative, raises ValueError appropriately, and uses round(..., 2) to return the expected precision as per the requirement."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change cleans up embedded unit tests inside the class file and adds standard rounding. The imported typing modules (`List`, `Union`) address previous lint/import issues appropriately."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers all acceptance criteria completely: valid inputs with rounding checks, boundary conditions (zero values), negative principal, negative years, and both negative simultaneously using pytest."
+      },
+      "diagnosis_quality": {
+        "score": 5,
+        "justification": "The diagnosis correctly identified the missing imports (`List`, `Union`) for type annotations used elsewhere in the file, which was successfully resolved by adding them in the diff."
+      },
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T8",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-5d37e28c",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 37.088,
+    "prompt_tokens": 3501,
+    "completion_tokens": 2374,
+    "total_tokens": 5875,
+    "cost_usd": 0.0013,
+    "a2a_messages": 4,
+    "tool_calls": 140,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.43,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.897,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.1154,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 11.2779,
+        "tokens": 3098,
+        "llm_calls": 1,
+        "cost_usd": 0.000777
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 13.9007,
+        "tokens": 1412,
+        "llm_calls": 1,
+        "cost_usd": 0.000267
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 8.5298,
+        "tokens": 1365,
+        "llm_calls": 1,
+        "cost_usd": 0.000256
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0017,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+  },
+  {
+    "task_id": "T8",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-c99d1b80",
+    "success": false,
+    "tests_passed": 0,
+    "tests_total": 1,
+    "recovery_cycles": 0,
+    "total_time_s": 24.258,
+    "prompt_tokens": 1664,
+    "completion_tokens": 1156,
+    "total_tokens": 2820,
+    "cost_usd": 0.000628,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": "Sequential single pass failed: tests_all_passed=False, regressions=0, audit_passed=False",
+    "regressions": [],
+    "coverage_percent": null,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 14.1804,
+        "tokens": 1250,
+        "llm_calls": 1,
+        "cost_usd": 0.000333
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.1043,
+        "tokens": 1570,
+        "llm_calls": 1,
+        "cost_usd": 0.000295
+      }
+    ],
+    "judge_error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+  },
+  {
+    "task_id": "T8",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-d3d01d77",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 37.522,
+    "prompt_tokens": 3457,
+    "completion_tokens": 2079,
+    "total_tokens": 5536,
+    "cost_usd": 0.001178,
+    "a2a_messages": 3,
+    "tool_calls": 20,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.3,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 9.2035,
+        "tokens": 2800,
+        "llm_calls": 1,
+        "cost_usd": 0.000658
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 12.4703,
+        "tokens": 1412,
+        "llm_calls": 1,
+        "cost_usd": 0.00027
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 13.8457,
+        "tokens": 1324,
+        "llm_calls": 1,
+        "cost_usd": 0.00025
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly capture the requirements: calculating the most frequent value, handling ties by returning the smallest value, and raising ValueError on empty lists."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks for empty lists and raises ValueError, uses `collections.Counter` to get frequencies, and correctly breaks ties using `min` with a key function `lambda val: (-counts[val], val)` to return the smallest value among the most frequent."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is minimal, imports Counter cleanly, follows PEP8 and type hinting conventions, and includes thorough docstrings consistent with the repository style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers all criteria explicitly: AC-1 (single most frequent values), AC-2 (tie-breaking with small values, negative numbers, and floats), and AC-3 (empty list raises ValueError). All tests pass successfully."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T8",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-2e41f7e7",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 1,
+    "total_time_s": 71.184,
+    "prompt_tokens": 6951,
+    "completion_tokens": 3731,
+    "total_tokens": 10682,
+    "cost_usd": 0.001731,
+    "a2a_messages": 4,
+    "tool_calls": 58,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.77,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [
+      "request_code_fix"
+    ],
+    "diagnoses": [
+      "incorrect_logic"
+    ],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8698,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 6.5189,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 9.4741,
+        "tokens": 3032,
+        "llm_calls": 1,
+        "cost_usd": 0.000694
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 18.8837,
+        "tokens": 1956,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 17.7062,
+        "tokens": 1460,
+        "llm_calls": 1,
+        "cost_usd": 0.00027
+      },
+      {
+        "agent": "GoogleADK:DebuggerAgent",
+        "latency_s": 7.747,
+        "tokens": 2693,
+        "llm_calls": 1,
+        "cost_usd": 0.000405
+      },
+      {
+        "agent": "CrewAI:ManagerAgent",
+        "latency_s": 6.7525,
+        "tokens": 1541,
+        "llm_calls": 1,
+        "cost_usd": 0.000362
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0019,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria clearly cover all requirements: returning the most frequent element (AC-1), returning the smallest value on ties (AC-2), and raising a ValueError for an empty list (AC-3)."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks for empty lists and raises a ValueError, computes frequencies accurately, and uses `min()` on the tied frequencies to return the smallest value."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code modification is clean, minimal, uses standard Python collections/built-ins, and properly utilizes type annotations."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers all acceptance criteria explicitly (AC-1, AC-2, AC-3), testing various types, negative numbers, floats, single-element lists, and tie-breaking behavior."
+      },
+      "diagnosis_quality": {
+        "score": 5,
+        "justification": "The failure diagnosis correctly identified a pre-existing logical bug in cycle 1 where `next(...)` was returning the first encountered value instead of the smallest value on ties, which was subsequently fixed by using `min(...)`."
+      },
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T9",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-edf02597",
+    "success": true,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "recovery_cycles": 0,
+    "total_time_s": 48.193,
+    "prompt_tokens": 3656,
+    "completion_tokens": 2612,
+    "total_tokens": 6268,
+    "cost_usd": 0.00141,
+    "a2a_messages": 4,
+    "tool_calls": 82,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.55,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8757,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.0634,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 18.6403,
+        "tokens": 2969,
+        "llm_calls": 1,
+        "cost_usd": 0.00072
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 15.8225,
+        "tokens": 1535,
+        "llm_calls": 1,
+        "cost_usd": 0.000302
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 10.3805,
+        "tokens": 1764,
+        "llm_calls": 1,
+        "cost_usd": 0.000388
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0024,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly cover all parts of the requirement, including positive numbers with even/odd roots, negative numbers with odd roots, n=0 edge case, and even n with negative x edge case."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation in calculator.py correctly handles zero degree (raising ValueError), even degree with negative x (raising ValueError), negative x with odd degree (calculating real root via -math.pow(-x, 1/n)), and positive numbers."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The change is minimal, cleanly typed, includes a clear docstring explaining arguments, returns, and exceptions, and follows the existing codebase style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests thoroughly verify positive roots, negative odd roots, zero radicands, zero degrees (AC-2), and even degrees with negative radicands (AC-3). All tests pass successfully."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T9",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-71a1e6cc",
+    "success": true,
+    "tests_passed": 14,
+    "tests_total": 14,
+    "recovery_cycles": 0,
+    "total_time_s": 43.349,
+    "prompt_tokens": 1814,
+    "completion_tokens": 1682,
+    "total_tokens": 3496,
+    "cost_usd": 0.000855,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 60.0,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 25.2502,
+        "tokens": 1391,
+        "llm_calls": 1,
+        "cost_usd": 0.000387
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 16.2486,
+        "tokens": 2105,
+        "llm_calls": 1,
+        "cost_usd": 0.000468
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "Although the Planner produced no explicit acceptance criteria list, the task requirements were implicitly fully understood and implemented with complete precision in both the code and test suites."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The `nth_root` method correctly handles positive numbers, negative radicands with odd degrees, and correctly raises ValueError for zero-degree roots and even-degree roots of negative numbers. All objective tests pass (14/14)."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The implementation is clean, well-documented with a docstring including Args, Returns, and Raises sections, and matches the existing style of the AdvancedCalculator class. It also includes comprehensive unit tests directly inside the module."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated tests in `test_devpilot_generated.py` thoroughly test positive radicands, zero radicands, negative radicands with odd degrees, zero-degree error handling, and even-degree negative radicand error handling using pytest."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T9",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-d0f4c0b0",
+    "success": true,
+    "tests_passed": 11,
+    "tests_total": 11,
+    "recovery_cycles": 0,
+    "total_time_s": 51.243,
+    "prompt_tokens": 3913,
+    "completion_tokens": 2630,
+    "total_tokens": 6543,
+    "cost_usd": 0.001443,
+    "a2a_messages": 3,
+    "tool_calls": 124,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 71.15,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 8.9458,
+        "tokens": 2539,
+        "llm_calls": 1,
+        "cost_usd": 0.000548
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 23.8987,
+        "tokens": 1777,
+        "llm_calls": 1,
+        "cost_usd": 0.000402
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 16.2036,
+        "tokens": 2227,
+        "llm_calls": 1,
+        "cost_usd": 0.000493
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly capture all requirements: real n-th root for valid inputs, raising ValueError for n=0, and raising ValueError for even n with negative x."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation handles positive numbers, zero, negative numbers with odd integer roots, negative numbers with even integer roots (raising ValueError), zero degree (raising ValueError), and non-integer degrees with negative numbers correctly."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-commented, type-hinted, concise, and matches the style of the existing AdvancedCalculator class."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "Comprehensive unit tests were generated covering positive/negative/fractional degrees, zero handling, zero degree errors, even root negative x errors, and non-integer degree errors with negative x."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T9",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-5b83915e",
+    "success": true,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "recovery_cycles": 0,
+    "total_time_s": 36.889,
+    "prompt_tokens": 4042,
+    "completion_tokens": 2137,
+    "total_tokens": 6179,
+    "cost_usd": 0.000957,
+    "a2a_messages": 4,
+    "tool_calls": 150,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 81.08,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.4,
+      "recall": 1.0,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8819,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 5.1191,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 8.9622,
+        "tokens": 2863,
+        "llm_calls": 1,
+        "cost_usd": 0.000617
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 7.1862,
+        "tokens": 1611,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 12.4215,
+        "tokens": 1705,
+        "llm_calls": 1,
+        "cost_usd": 0.00034
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.002,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely cover the core requirement (real n-th root calculation) and all specified edge cases/errors (ValueError for n=0, and for even n with negative x), as well as code standards (AC-4)."
+      },
+      "code_correctness": {
+        "score": 4,
+        "justification": "The method correctly checks for n == 0 and n % 2 == 0 with x < 0, raising ValueError appropriately. However, using math.pow(x, 1/n) fails for negative x when n is odd (e.g., nth_root(-8, 3) raises ValueError: math domain error because math.pow(-8, 1/3) attempts a fractional power on a negative base). Supporting odd roots of negative numbers typically requires `math.copysign(abs(x) ** (1/n), x)` or similar logic."
+      },
+      "code_quality": {
+        "score": 4,
+        "justification": "The code change is clean and properly typed, but mixing unit tests and the main calculator class implementation inside `src/calculator.py` violates good separation of concerns, especially since a separate test file was generated."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The tests generated in `tests/test_devpilot_generated.py` thoroughly cover valid inputs (AC-1), zero denominator (AC-2), even root of negative numbers (AC-3), and docstrings/type annotations (AC-4)."
+      },
+      "diagnosis_quality": null,
+      "overall": 4.5,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T10",
+    "arch": "C1",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-3f8c3c3e",
+    "success": true,
+    "tests_passed": 11,
+    "tests_total": 11,
+    "recovery_cycles": 0,
+    "total_time_s": 75.401,
+    "prompt_tokens": 4011,
+    "completion_tokens": 1972,
+    "total_tokens": 5983,
+    "cost_usd": 0.00119,
+    "a2a_messages": 4,
+    "tool_calls": 174,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.55,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 0.8881,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.0606,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 27.7075,
+        "tokens": 2694,
+        "llm_calls": 1,
+        "cost_usd": 0.000544
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 18.4012,
+        "tokens": 1650,
+        "llm_calls": 1,
+        "cost_usd": 0.000282
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 26.0381,
+        "tokens": 1639,
+        "llm_calls": 1,
+        "cost_usd": 0.000364
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0018,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely cover all aspects of the requirement: AC-1 specifies behavior for value within range, below low, and above high; AC-2 specifies the ValueError when low > high; and AC-3 mandates comprehensive unit tests."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation in `src/calculator.py` correctly checks if `low > high` and raises `ValueError`, handles values below low and above high, and returns the expected clamped float."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The added method includes clear type hints, a comprehensive docstring matching the project's style, and cleanly implements the logic without unnecessary complexity."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The tests in `tests/test_devpilot_generated.py` thoroughly check normal ranges, values below/above boundaries, exact boundary conditions, equal low and high values, and the invalid range raising `ValueError` (AC-2)."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T10",
+    "arch": "C2",
+    "architecture": "Sequential-Baseline",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-SEQ-c3756f8a",
+    "success": true,
+    "tests_passed": 14,
+    "tests_total": 14,
+    "recovery_cycles": 0,
+    "total_time_s": 32.559,
+    "prompt_tokens": 1795,
+    "completion_tokens": 1401,
+    "total_tokens": 3196,
+    "cost_usd": 0.00074,
+    "a2a_messages": 0,
+    "tool_calls": 3,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 77.78,
+    "retrieval": null,
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 15.6326,
+        "tokens": 1366,
+        "llm_calls": 1,
+        "cost_usd": 0.000378
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 11.8099,
+        "tokens": 1830,
+        "llm_calls": 1,
+        "cost_usd": 0.000362
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 3,
+        "justification": "No acceptance criteria were explicitly produced by the planner beforehand (listed as '(none)'), but the implementation accurately addresses standard requirements for a new feature implementation."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The clamp method is correctly implemented with proper boundary checks and raises a ValueError if low > high. All 14 objective tests passed successfully."
+      },
+      "code_quality": {
+        "score": 4,
+        "justification": "The code change is clean, well-documented with docstrings, and follows the existing codebase style. However, importing `unittest` directly inside `src/calculator.py` along with having inline unittest test cases within the core module file is slightly unconventional compared to separating tests into a dedicated test directory."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "Comprehensive tests were generated covering values within range, below low, above high, exact boundaries, equal bounds, invalid ranges (raising ValueError), negative ranges, and power methods."
+      },
+      "diagnosis_quality": null,
+      "overall": 4.25,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T10",
+    "arch": "C3",
+    "architecture": "Hierarchical-P2P-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-P2P-b4759acd",
+    "success": true,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "recovery_cycles": 0,
+    "total_time_s": 58.168,
+    "prompt_tokens": 3980,
+    "completion_tokens": 2341,
+    "total_tokens": 6321,
+    "cost_usd": 0.001334,
+    "a2a_messages": 3,
+    "tool_calls": 42,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.0,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.0,
+      "recall": 0.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 18.9117,
+        "tokens": 3162,
+        "llm_calls": 1,
+        "cost_usd": 0.000731
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 15.4746,
+        "tokens": 1622,
+        "llm_calls": 1,
+        "cost_usd": 0.000272
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 18.5176,
+        "tokens": 1537,
+        "llm_calls": 1,
+        "cost_usd": 0.000331
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely capture all requirements, including valid ranges, bounds (below/above/within), and the ValueError requirement when low > high."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks for low > high, raises a ValueError, and uses max(low, min(value, high)) to accurately clamp the value."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The change is minimal, includes comprehensive docstrings with Args, Returns, and Raises sections, and matches the style of AdvancedCalculator."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The tests cover every single acceptance criterion (AC-1 through AC-4), include boundary checks (exact boundaries, low equals high), and use pytest.raises correctly."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T10",
+    "arch": "C4",
+    "architecture": "Hierarchical-CrossModel",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "ollama_chat/qwen2.5:1.5b",
+    "attempts": 1,
+    "run_id": "RUN-e35efd9e",
+    "success": true,
+    "tests_passed": 11,
+    "tests_total": 11,
+    "recovery_cycles": 0,
+    "total_time_s": 62.302,
+    "prompt_tokens": 3833,
+    "completion_tokens": 2269,
+    "total_tokens": 6102,
+    "cost_usd": 0.001033,
+    "a2a_messages": 4,
+    "tool_calls": 68,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 80.65,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 1.0,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.2314,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 10.2164,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 9.9907,
+        "tokens": 3028,
+        "llm_calls": 1,
+        "cost_usd": 0.000692
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 23.8926,
+        "tokens": 1477,
+        "llm_calls": 1,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 9.8475,
+        "tokens": 1597,
+        "llm_calls": 1,
+        "cost_usd": 0.000341
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0056,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely address all components of the requirement: AC-1 covers method signature and behavior, AC-2 covers the ValueError when low > high, and AC-3 covers all boundary/range return values."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks `if low > high:` and raises a `ValueError`, and uses `min(max(value, low), high)` to clamp the value correctly according to the acceptance criteria."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, concise, uses proper type hints, matches the existing coding style of the AdvancedCalculator class, and even includes the standard_deviation method as part of the normal codebase evolution."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers all requirements thoroughly: within range, below low, above high, boundary conditions (value == low/high, low == high), and the `ValueError` when `low > high`."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T1",
+    "arch": "C1R",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "react",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-ffd74bfd",
+    "success": true,
+    "tests_passed": 13,
+    "tests_total": 13,
+    "recovery_cycles": 1,
+    "total_time_s": 63.691,
+    "prompt_tokens": 6455,
+    "completion_tokens": 3088,
+    "total_tokens": 9543,
+    "cost_usd": 0.00188,
+    "a2a_messages": 4,
+    "tool_calls": 34,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [
+      "request_code_fix"
+    ],
+    "diagnoses": [
+      "syntax_error"
+    ],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.3811,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.2426,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 9.1778,
+        "tokens": 3069,
+        "llm_calls": 1,
+        "cost_usd": 0.000683
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 8.6614,
+        "tokens": 1484,
+        "llm_calls": 1,
+        "cost_usd": 0.000148
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 14.5367,
+        "tokens": 1228,
+        "llm_calls": 1,
+        "cost_usd": 0.000315
+      },
+      {
+        "agent": "GoogleADK:DebuggerAgent",
+        "latency_s": 12.4255,
+        "tokens": 2181,
+        "llm_calls": 1,
+        "cost_usd": 0.000354
+      },
+      {
+        "agent": "CrewAI:ManagerAgent",
+        "latency_s": 9.5383,
+        "tokens": 1581,
+        "llm_calls": 1,
+        "cost_usd": 0.00038
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0053,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely map to the requirements, covering population and sample calculations along with the required ValueError edge cases for empty lists and single-element lists under sample=True."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The `standard_deviation` implementation accurately computes population (N divisor) and sample (N-1 divisor) standard deviations, properly handles the empty list check for both cases, and raises ValueError when sample=True with fewer than two values."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, follows existing style patterns in the repository, and utilizes standard library tools like `math.sqrt` appropriately."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers all acceptance criteria thoroughly, including default/explicit sample parameters, floats, negative numbers, single-element population lists, and ValueError edge cases for empty lists and single-element sample lists."
+      },
+      "diagnosis_quality": {
+        "score": 1,
+        "justification": "The failure diagnosis states that src/calculator.py contains non-Python tool text and lacks the implementation, which is completely false for the provided successful code change diff. The diagnosis appears to be a hallucinated or misapplied artifact from an earlier iteration."
+      },
+      "overall": 4.2,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T1",
+    "arch": "C1F",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "few_shot",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-2dfaba99",
+    "success": true,
+    "tests_passed": 11,
+    "tests_total": 11,
+    "recovery_cycles": 0,
+    "total_time_s": 48.972,
+    "prompt_tokens": 4447,
+    "completion_tokens": 2876,
+    "total_tokens": 7323,
+    "cost_usd": 0.001595,
+    "a2a_messages": 4,
+    "tool_calls": 58,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.3984,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.1447,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 11.5385,
+        "tokens": 3491,
+        "llm_calls": 1,
+        "cost_usd": 0.000852
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 15.2446,
+        "tokens": 2036,
+        "llm_calls": 1,
+        "cost_usd": 0.000344
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 13.6667,
+        "tokens": 1796,
+        "llm_calls": 1,
+        "cost_usd": 0.000399
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0045,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1 through AC-4) completely capture the requirements, specifying population vs sample standard deviation, edge cases for empty lists and insufficient elements for sample=True, and testing requirements."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly calculates both population (N denominator) and sample (N-1 denominator) standard deviations, uses the existing mean method, and correctly raises ValueError for empty lists and single-element sample calculations."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-typed, includes appropriate docstrings, and blends seamlessly with the existing structure of AdvancedCalculator."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers population standard deviation (default and explicit), single-element population, sample standard deviation, empty list checks for both settings, and insufficient elements with sample=True. All 11 objective tests passed."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T1",
+    "arch": "C1S",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Strict-Architect",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-d209340a",
+    "success": true,
+    "tests_passed": 14,
+    "tests_total": 14,
+    "recovery_cycles": 0,
+    "total_time_s": 61.482,
+    "prompt_tokens": 4359,
+    "completion_tokens": 2847,
+    "total_tokens": 7206,
+    "cost_usd": 0.001575,
+    "a2a_messages": 4,
+    "tool_calls": 82,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 97.06,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.3255,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.2253,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 14.106,
+        "tokens": 2991,
+        "llm_calls": 1,
+        "cost_usd": 0.000652
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 21.5418,
+        "tokens": 2115,
+        "llm_calls": 1,
+        "cost_usd": 0.000441
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 17.3508,
+        "tokens": 2100,
+        "llm_calls": 1,
+        "cost_usd": 0.000482
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0065,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1 through AC-4) cover all requirements: standard deviation calculation for both sample and population, raising ValueError for empty lists and for sample=True with fewer than two values, and comprehensive unit tests."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation in src/calculator.py correctly handles population vs sample standard deviation, checks for empty lists (raising ValueError), handles the < 2 values constraint for sample=True (raising ValueError), and even adds helpful type checking."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, well-documented with docstrings, follows the existing style of AdvancedCalculator, and uses concise Python constructs."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test file tests normal calculations, population vs sample modes, boundary conditions (single element, identical elements, tuple inputs), empty list exceptions, sample=<2 values exceptions, and type errors, achieving 14/14 passing tests."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T1",
+    "arch": "C1P",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Permissive-Prototyper",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-89d4aa55",
+    "success": true,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "recovery_cycles": 0,
+    "total_time_s": 48.439,
+    "prompt_tokens": 4049,
+    "completion_tokens": 2736,
+    "total_tokens": 6785,
+    "cost_usd": 0.0015,
+    "a2a_messages": 4,
+    "tool_calls": 24,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 0.0,
+      "mrr": 0.5
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.3166,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.3423,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 15.5394,
+        "tokens": 3410,
+        "llm_calls": 1,
+        "cost_usd": 0.00082
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 10.0933,
+        "tokens": 1683,
+        "llm_calls": 1,
+        "cost_usd": 0.000287
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 14.2687,
+        "tokens": 1692,
+        "llm_calls": 1,
+        "cost_usd": 0.000393
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0045,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1 through AC-4) completely, specifically, and testably cover the requirements, including population vs. sample standard deviation, empty list validation for both modes, and the sample size restriction."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly computes both population (divisor = len) and sample (divisor = len - 1) standard deviation, uses the existing mean method, and properly raises ValueError for empty lists and single-element samples."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, concise, uses appropriate type hints (List[Union[int, float]]), adheres to the existing class structure, and is well-formatted."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The unit tests comprehensively verify every acceptance criterion and edge case (AC-1 through AC-4, single-element population, empty lists, and sample with insufficient elements) using pytest.approx for floating-point comparisons."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T2",
+    "arch": "C1R",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "react",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-3d27ae47",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 52.892,
+    "prompt_tokens": 8739,
+    "completion_tokens": 2090,
+    "total_tokens": 10829,
+    "cost_usd": 0.00171,
+    "a2a_messages": 4,
+    "tool_calls": 54,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.2034,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.1519,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 11.1079,
+        "tokens": 2746,
+        "llm_calls": 1,
+        "cost_usd": 0.000628
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 23.3209,
+        "tokens": 6730,
+        "llm_calls": 1,
+        "cost_usd": 0.000835
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 10.2372,
+        "tokens": 1353,
+        "llm_calls": 1,
+        "cost_usd": 0.000247
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0048,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) perfectly cover the requirement: odd-length lists, even-length lists, and the ValueError for empty lists."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly checks for empty lists, sorts the input to ensure accurate median finding regardless of input order, handles odd lengths, and averages the two middle elements for even lengths."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, well-documented with a docstring matching existing patterns, and correctly typed."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The tests thoroughly cover AC-1, AC-2, and AC-3, including tests for unsorted lists, single-item lists, negative numbers, floats, and exception raising."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T2",
+    "arch": "C1F",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Balanced-Engineer",
+    "prompt_style": "few_shot",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-ba822afc",
+    "success": true,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "recovery_cycles": 0,
+    "total_time_s": 37.858,
+    "prompt_tokens": 3802,
+    "completion_tokens": 2042,
+    "total_tokens": 5844,
+    "cost_usd": 0.001197,
+    "a2a_messages": 4,
+    "tool_calls": 78,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.4142,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.1472,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 10.6853,
+        "tokens": 2858,
+        "llm_calls": 1,
+        "cost_usd": 0.000673
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 10.2002,
+        "tokens": 1683,
+        "llm_calls": 1,
+        "cost_usd": 0.00029
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 8.494,
+        "tokens": 1303,
+        "llm_calls": 1,
+        "cost_usd": 0.000234
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0047,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1, AC-2, AC-3) completely, specifically, and testably cover the core requirements of implementing the median method for odd-length lists, even-length lists, and raising a ValueError on empty input."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly handles odd-length lists (returns the exact middle value as a float), even-length lists (returns the average of the two middle values), and raises a ValueError when the input list is empty."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is clean, minimal, properly typed with type hints, and includes a clear docstring matching the style of the codebase."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test file thoroughly validates every acceptance criterion using pytest, covering multiple edge cases including negative numbers, floats, single-element lists, and exception matching."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T2",
+    "arch": "C1S",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Strict-Architect",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-ec5490c3",
+    "success": true,
+    "tests_passed": 13,
+    "tests_total": 13,
+    "recovery_cycles": 0,
+    "total_time_s": 95.622,
+    "prompt_tokens": 4656,
+    "completion_tokens": 3598,
+    "total_tokens": 8254,
+    "cost_usd": 0.001905,
+    "a2a_messages": 4,
+    "tool_calls": 102,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 56.06,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.3474,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.24,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 32.9103,
+        "tokens": 2932,
+        "llm_calls": 1,
+        "cost_usd": 0.000703
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 35.0131,
+        "tokens": 2551,
+        "llm_calls": 1,
+        "cost_usd": 0.000702
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 18.6575,
+        "tokens": 2771,
+        "llm_calls": 1,
+        "cost_usd": 0.0005
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.0218,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria (AC-1 through AC-4) precisely map to the requirements, covering odd-length, even-length, empty list error handling, and unsorted input handling without any superfluous items."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly computes the median for both odd and even lists, raises ValueError on empty collections, correctly sorts unsorted inputs, and includes robust type/guard validations."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code changes are clean, well-documented with docstrings specifying types and exceptions, and consistent with the existing codebase style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The generated test suite thoroughly verifies all acceptance criteria (AC-1 to AC-4) and tests critical edge cases such as negative numbers, duplicates, tuples, and invalid type inputs, achieving 100% passing tests."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  },
+  {
+    "task_id": "T2",
+    "arch": "C1P",
+    "architecture": "Hierarchical-Blackboard-A2A",
+    "persona": "Permissive-Prototyper",
+    "prompt_style": "standard",
+    "model": "gemini-3.5-flash",
+    "coder_model": "gemini-3.5-flash",
+    "attempts": 1,
+    "run_id": "RUN-c51df0b9",
+    "success": true,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "recovery_cycles": 0,
+    "total_time_s": 46.197,
+    "prompt_tokens": 3495,
+    "completion_tokens": 1707,
+    "total_tokens": 5202,
+    "cost_usd": 0.001032,
+    "a2a_messages": 4,
+    "tool_calls": 126,
+    "is_estimated": false,
+    "error": null,
+    "regressions": [],
+    "coverage_percent": 96.67,
+    "retrieval": {
+      "k": 5,
+      "precision_at_k": 0.2,
+      "recall": 0.5,
+      "hit_at_1": 1.0,
+      "mrr": 1.0
+    },
+    "manager_decisions": [],
+    "diagnoses": [],
+    "agents": [
+      {
+        "agent": "MCP:TestRunner",
+        "latency_s": 2.3637,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "GoogleADK:RepositoryRAGAgent",
+        "latency_s": 0.175,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "agent": "CrewAI:PlannerAgent",
+        "latency_s": 8.6415,
+        "tokens": 2476,
+        "llm_calls": 1,
+        "cost_usd": 0.00052
+      },
+      {
+        "agent": "GoogleADK:CoderAgent",
+        "latency_s": 13.176,
+        "tokens": 1370,
+        "llm_calls": 1,
+        "cost_usd": 0.000241
+      },
+      {
+        "agent": "GoogleADK:TestGeneratorAgent",
+        "latency_s": 15.8803,
+        "tokens": 1356,
+        "llm_calls": 1,
+        "cost_usd": 0.000271
+      },
+      {
+        "agent": "CrewAI:AuditorAgent",
+        "latency_s": 0.005,
+        "tokens": 0,
+        "llm_calls": 0,
+        "cost_usd": 0.0
+      }
+    ],
+    "judge": {
+      "plan_quality": {
+        "score": 5,
+        "justification": "The acceptance criteria precisely capture the requirements: AC-1 covers odd-length lists, AC-2 covers even-length lists, and AC-3 covers the empty list ValueError condition. They are clean, specific, and directly testable."
+      },
+      "code_correctness": {
+        "score": 5,
+        "justification": "The implementation correctly sorts the input list, handles odd-length indices to return the exact middle element, averages the two middle elements for even-length lists, and correctly raises a ValueError for empty lists."
+      },
+      "code_quality": {
+        "score": 5,
+        "justification": "The code change is concise, uses standard Python built-ins efficiently (`sorted()`), uses proper type hints (`List[Union[int, float]]`), and seamlessly integrates into the `AdvancedCalculator` class adhering to the surrounding code style."
+      },
+      "test_adequacy": {
+        "score": 5,
+        "justification": "The test suite covers all ACs (AC-1 via `test_median_odd_length`, AC-2 via `test_median_even_length`, and AC-3 via `test_median_empty_list_raises_value_error`) plus additional crucial edge cases like single-element lists and unsorted lists with mixed types."
+      },
+      "diagnosis_quality": null,
+      "overall": 5.0,
+      "judge_model": "gemini-3.5-flash-lite"
+    }
+  }
+]
