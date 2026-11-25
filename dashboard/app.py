@@ -26,6 +26,7 @@ from config.settings import settings  # noqa: E402
 from core.a2a import global_a2a_bus  # noqa: E402
 from core.blackboard import global_blackboard  # noqa: E402
 from core.hitl import hitl_gatekeeper  # noqa: E402
+from core.observability import callback_manager  # noqa: E402
 from core.observability.tool_validation import tool_validation_stats  # noqa: E402
 from mcp_servers.repo_tool import mcp_repo_client  # noqa: E402
 from core.schemas.repository import RepositoryConfig  # noqa: E402
@@ -42,6 +43,65 @@ def html(markup: str) -> None:
 
 def esc(text) -> str:
     return _html.escape(str(text))
+
+
+# Lucide-style line icons (stroke = currentColor)
+_ICON_PATHS = {
+    "search": '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+    "compass": '<circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5z"/>',
+    "code": '<path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/>',
+    "flask": '<path d="M9 3h6"/><path d="M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>',
+    "wrench": '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>',
+    "shield": '<path d="M12 3 4 6v6c0 5 3.4 8.3 8 9 4.6-.7 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+    "usercheck": '<circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/><path d="m16 11 2 2 4-4"/>',
+    "target": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+    "database": '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+    "stethoscope": '<path d="M5 3v6a5 5 0 0 0 10 0V3"/><path d="M10 14v2a5 5 0 0 0 10 0v-3"/><circle cx="20" cy="11" r="2"/>',
+    "scale": '<path d="M12 3v18"/><path d="M5 7h14"/><path d="m5 7-3 7a3 3 0 0 0 6 0z"/><path d="m19 7-3 7a3 3 0 0 0 6 0z"/>',
+    "plug": '<path d="M9 2v6"/><path d="M15 2v6"/><path d="M6 8h12v4a6 6 0 0 1-12 0z"/><path d="M12 18v4"/>',
+    "refresh": '<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/>',
+    "layers": '<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/>',
+    "lock": '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+    "chart": '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
+    "toolbox": '<rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"/><path d="M3 13h18"/>',
+    "radio": '<circle cx="12" cy="12" r="2"/><path d="M7.8 16.2a6 6 0 0 1 0-8.4"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4"/><path d="M4.9 19.1a10 10 0 0 1 0-14.2"/><path d="M19.1 4.9a10 10 0 0 1 0 14.2"/>',
+    "file": '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/>',
+    "bot": '<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/>',
+    "check": '<path d="M20 6 9 17l-5-5"/>',
+    "x": '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+    "spark": '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>',
+}
+_EMOJI_ICON = {"🔎": "search", "🧭": "compass", "🛠️": "code", "♻️": "refresh", "🎯": "target", "🛡️": "shield",
+               "📚": "database", "💻": "code", "🧪": "flask", "🩺": "stethoscope", "⚖️": "scale", "🔧": "plug",
+               "🧱": "layers", "🔐": "lock", "📈": "chart", "🧰": "toolbox", "📡": "radio", "🧾": "file", "🤖": "bot"}
+
+
+def icon(name: str, size: int = 18) -> str:
+    return (f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+            f'stroke-linecap="round" stroke-linejoin="round">{_ICON_PATHS.get(name, _ICON_PATHS["spark"])}</svg>')
+
+
+def ico(emoji_or_name: str) -> str:
+    return icon(_EMOJI_ICON.get(emoji_or_name, emoji_or_name))
+
+
+def diff_html(diff: str) -> str:
+    """GitHub-style coloured unified diff."""
+    rows = []
+    for line in diff.splitlines():
+        cls = "meta"
+        if line.startswith("+++") or line.startswith("---") or line.startswith("diff ") or line.startswith("index "):
+            cls = "meta"
+        elif line.startswith("@@"):
+            cls = "hunk"
+        elif line.startswith("+"):
+            cls = "add"
+        elif line.startswith("-"):
+            cls = "del"
+        else:
+            cls = "ctx"
+        rows.append(f'<div class="dl {cls}">{esc(line) or "&nbsp;"}</div>')
+    return '<div class="dp-diff">' + "".join(rows) + "</div>"
 
 
 # ---------------------------------------------------------------------------
@@ -146,6 +206,53 @@ div[role="tablist"] { gap:4px !important; background:rgba(18,25,53,0.8); border:
 [data-testid="stDataFrame"] { border:1px solid var(--line); border-radius:12px; overflow:hidden; }
 [data-testid="stWidgetLabel"] p { color:var(--muted) !important; font-weight:500 !important; }
 
+/* icons */
+.dp-ico { color:#A5ABFF; }
+.dp-ico svg { display:block; }
+
+/* live pipeline */
+@keyframes dpPulse { 0% { box-shadow:0 0 0 0 rgba(124,131,255,0.55); } 70% { box-shadow:0 0 0 10px rgba(124,131,255,0); } 100% { box-shadow:0 0 0 0 rgba(124,131,255,0); } }
+@keyframes dpShimmer { 0% { background-position:-200px 0; } 100% { background-position:200px 0; } }
+.dp-node .ni { display:grid; place-items:center; width:30px; height:30px; margin:0 auto 6px auto; border-radius:9px;
+               color:var(--muted); background:rgba(255,255,255,0.04); border:1px solid var(--line); }
+.dp-node.active { border-color:rgba(124,131,255,0.8); animation:dpPulse 1.6s infinite;
+                  background:linear-gradient(90deg, rgba(124,131,255,0.06), rgba(124,131,255,0.18), rgba(124,131,255,0.06));
+                  background-size:400px 100%; }
+.dp-node.active .ni { color:#fff; background:var(--brand); border-color:var(--brand); }
+.dp-node.done .ni { color:#0B1020; background:var(--ok); border-color:var(--ok); }
+.dp-node.wait .ni { color:#0B1020; background:var(--warn); border-color:var(--warn); }
+.dp-node.fail { border-color:rgba(248,113,113,0.6); background:rgba(248,113,113,0.07); }
+.dp-node.fail .ni { color:#fff; background:var(--bad); border-color:var(--bad); }
+.dp-node.skip { opacity:0.55; }
+
+/* activity feed */
+.dp-feed { margin-top:10px; background:rgba(8,12,26,0.85); border:1px solid var(--line); border-radius:14px; padding:12px 16px;
+           font-family:'JetBrains Mono', monospace; font-size:0.8rem; max-height:300px; overflow:auto; }
+.dp-feed .fl { display:flex; gap:10px; padding:3px 0; color:#C9CEEA; border-bottom:1px dashed rgba(148,163,255,0.07); }
+.dp-feed .ft { color:#6B74A8; min-width:52px; }
+.dp-feed .fk { min-width:78px; font-weight:600; }
+.fk.agent { color:#A5ABFF; } .fk.tool { color:#FDE68A; } .fk.guard { color:#6EE7B7; } .fk.hitl { color:#FBBF24; } .fk.a2a { color:#67E8F9; }
+.dp-live-head { display:flex; align-items:center; gap:10px; color:var(--text); font-weight:700; margin-top:4px; }
+.dp-dot { width:9px; height:9px; border-radius:50%; background:var(--brand2); animation:dpPulse 1.2s infinite; }
+
+/* diff */
+.dp-diff { background:#0A0F1F; border:1px solid var(--line); border-radius:12px; overflow:auto; font-family:'JetBrains Mono', monospace;
+           font-size:0.8rem; line-height:1.55; max-height:520px; }
+.dp-diff .dl { white-space:pre; padding:0 14px; color:#C9CEEA; }
+.dp-diff .add { background:rgba(52,211,153,0.12); color:#A7F3D0; border-left:3px solid #34D399; }
+.dp-diff .del { background:rgba(248,113,113,0.12); color:#FECACA; border-left:3px solid #F87171; }
+.dp-diff .hunk { color:#93C5FD; background:rgba(59,130,246,0.08); }
+.dp-diff .meta { color:#6B74A8; }
+
+/* tests */
+.dp-bar { height:10px; border-radius:999px; background:rgba(248,113,113,0.35); overflow:hidden; margin:8px 0 14px 0; }
+.dp-bar > div { height:100%; background:linear-gradient(90deg, #34D399, #22D3EE); }
+.dp-chips { display:flex; flex-wrap:wrap; gap:6px; max-height:330px; overflow:auto; }
+.dp-chip-t { font-family:'JetBrains Mono', monospace; font-size:0.72rem; padding:4px 9px; border-radius:8px; }
+.dp-chip-t.ok { color:#A7F3D0; background:rgba(52,211,153,0.10); border:1px solid rgba(52,211,153,0.25); }
+.dp-chip-t.bad { color:#FECACA; background:rgba(248,113,113,0.12); border:1px solid rgba(248,113,113,0.35); }
+.dp-chip-t.new { box-shadow: inset 0 0 0 1px rgba(124,131,255,0.6); }
+
 /* footer */
 .dp-footer { margin-top:56px; padding:22px 4px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:var(--muted); font-size:0.85rem; }
 .dp-footer b { color:var(--text); }
@@ -200,7 +307,7 @@ CONFIG_LABELS = {"C1": "C1 Hierarchical + Blackboard", "C2": "C2 Sequential", "C
                  "C1S": "C1 + Strict persona", "C1P": "C1 + Permissive persona"}
 PALETTE = ["#7C83FF", "#22D3EE", "#F472B6", "#FBBF24", "#34D399"]
 
-for key, default in (("metrics", None), ("judge", None), ("rag_run_id", None), ("compare_rows", []),
+for key, default in (("feed", []), ("metrics", None), ("judge", None), ("rag_run_id", None), ("compare_rows", []),
                      ("repo_url", "sample_repo"), ("repo_branch", "main"), ("rag_repo", None)):
     st.session_state.setdefault(key, default)
 
@@ -290,6 +397,60 @@ def section(title: str, sub: str = "") -> None:
          + (f'<div class="dp-sub">{esc(sub)}</div>' if sub else "") + "</div>")
 
 
+FLOW = [("RAG", "ADK", "search"), ("Plan", "CrewAI", "compass"), ("Code", "ADK", "code"), ("Test", "ADK + MCP", "flask"),
+        ("Repair", "Debugger · Manager", "wrench"), ("Audit", "CrewAI", "shield"), ("Approve", "Human", "usercheck")]
+_AGENT_STEP = {"RepositoryRAG": "RAG", "Planner": "Plan", "Coder": "Code", "TestGenerator": "Test",
+               "Debugger": "Repair", "Manager": "Repair", "Auditor": "Audit"}
+
+
+def flow_html(states: dict) -> str:
+    cells = []
+    for name, sub, ic in FLOW:
+        cls, label = states.get(name, ("", None))
+        mark = icon("check", 16) if cls == "done" else icon("x", 16) if cls == "fail" else icon(ic, 16)
+        cells.append(f'<div class="dp-node {cls}"><div class="ni">{mark}</div><b>{name}</b><span>{esc(label or sub)}</span></div>')
+    return '<div class="dp-flow">' + "".join(cells) + "</div>"
+
+
+def describe_event(e):
+    """(kind, text, step, phase) for a callback event, or None to skip it."""
+    md = e.metadata or {}
+    if e.category == "agent":
+        agent = md.get("agent_id", "")
+        short = agent.split(":")[-1].replace("Agent", "")
+        fw = "CrewAI" if agent.startswith("CrewAI") else "ADK"
+        verb = "started" if e.event_name == "AGENT_START" else "finished" if e.event_name == "AGENT_FINISH" else "error"
+        detail = md.get("task_title") or md.get("summary") or md.get("error_message") or ""
+        return "agent", f"{fw} {short} {verb}: {str(detail)[:90]}", _AGENT_STEP.get(short), verb
+    if e.category == "tool" and e.event_name == "TOOL_START":
+        name = md.get("tool_name", "")
+        if not name.startswith("mcp_"):
+            return None
+        return "tool", f"MCP {name.replace('mcp_', '').replace(':', ' › ')}", None, "tool"
+    if e.category == "guardrail":
+        txt = e.details.replace("Guardrail ", "")
+        if "ToolOutputValidation" in txt:
+            return None
+        return "guard", txt[:110], "Audit" if "AST" in txt else None, "guard"
+    if e.category == "hitl":
+        return "hitl", e.details[:110], "Approve", "wait"
+    return None
+
+
+def final_states(m) -> dict:
+    if m is None:
+        return {}
+    st_ = {n: ("done", None) for n, _, _ in FLOW}
+    n = m.failure_recovery_cycles
+    st_["Repair"] = ("done", f"{n} cycle{'s' if n != 1 else ''}") if n else ("skip", "not needed")
+    if not m.success:
+        st_["Audit"] = ("fail", "blocked")
+    status_ = global_blackboard.state.human_approval_status
+    st_["Approve"] = (("done", "approved") if status_ == "approved" else ("fail", "rejected") if status_ == "rejected"
+                      else ("wait", "waiting for you") if m.success else ("skip", "not reached"))
+    return st_
+
+
 results_df, latency_df = load_results()
 main_df = results_df[results_df["Config"].isin(["C1", "C2", "C3", "C4"])] if not results_df.empty else results_df
 
@@ -337,7 +498,7 @@ with tab_home:
              ("03", "🛠️", "Build & test", "The ADK Coder edits the code in a sandbox; the Tester writes new tests and runs them with the old suite through MCP."),
              ("04", "♻️", "Repair & approve", "On failure the Debugger diagnoses, the Manager re-plans (up to 3 cycles). A human approves the final diff.")]
     html('<div class="dp-grid dp-g4">' + "".join(
-        f'<div class="dp-card"><div class="dp-ico">{i}</div><div class="dp-num" style="margin-top:12px">STEP {n}</div><h4>{t}</h4><p>{d}</p></div>'
+        f'<div class="dp-card"><div class="dp-ico">{ico(i)}</div><div class="dp-num" style="margin-top:12px">STEP {n}</div><h4>{t}</h4><p>{d}</p></div>'
         for n, i, t, d in steps) + "</div>")
 
     section("The agent team", "CrewAI handles management and review; Google ADK handles the technical work.")
@@ -351,7 +512,7 @@ with tab_home:
               ("⚖️", "Judge", "A different model scores plan, code and tests from 1 to 5.", "adk", "Google ADK (evaluation)"),
               ("🔧", "MCP tools", "repo_tool and test_runner servers: sandbox, patch, diff, pytest, coverage.", "tool", "MCP")]
     html('<div class="dp-grid dp-g3">' + "".join(
-        f'<div class="dp-card"><div class="dp-ico">{i}</div><h4>{n}</h4><p>{d}</p><span class="dp-tag dp-{c}">{t}</span></div>'
+        f'<div class="dp-card"><div class="dp-ico">{ico(i)}</div><h4>{n}</h4><p>{d}</p><span class="dp-tag dp-{c}">{t}</span></div>'
         for i, n, d, c, t in agents) + "</div>")
 
     section("What makes it different")
@@ -360,7 +521,7 @@ with tab_home:
              ("🔐", "Secure by design", "Prompt-injection and toxicity guardrails, AST scanning, sandboxing and a human approval gate."),
              ("📈", "Measured honestly", "Every run records per-agent tokens, latency and cost from the provider. Quota failures never count as success.")]
     html('<div class="dp-grid dp-g2">' + "".join(
-        f'<div class="dp-card"><div class="dp-ico">{i}</div><h4>{t}</h4><p>{d}</p></div>' for i, t, d in feats) + "</div>")
+        f'<div class="dp-card"><div class="dp-ico">{ico(i)}</div><h4>{t}</h4><p>{d}</p></div>' for i, t, d in feats) + "</div>")
 
 # =============================================================================
 # STUDIO
@@ -392,52 +553,68 @@ with tab_run:
             run_clicked = st.button("⚡  Run the agents", type="primary", key="btn_run_pipeline",
                                     disabled=not prompt.strip(), width="stretch")
 
+    flow_ph = st.empty()
+    feed_ph = st.empty()
     if run_clicked:
         st.session_state.judge = None
-        with st.status("Agents at work: retrieving code, planning, coding, testing…", expanded=False) as status:
-            try:
-                st.session_state.metrics = run_pipeline(prompt.strip(), ARCH_OPTIONS[arch_label],
-                                                        PERSONAS[persona_label], PROMPT_STYLES[style_label],
-                                                        st.session_state.repo_url, st.session_state.repo_branch)
-                status.update(label="Run complete", state="complete" if st.session_state.metrics.success else "error")
-            except Exception as exc:  # noqa: BLE001
-                st.session_state.metrics = None
-                status.update(label="Run failed", state="error")
-                st.error(friendly_error(f"{type(exc).__name__}: {exc}"))
+        st.session_state.feed = []
+        live = {"states": {"RAG": ("active", "starting…")}, "t0": None}
+
+        def _listener(e):
+            d = describe_event(e)
+            if d is None:
+                return
+            kind, text, step, phase = d
+            if st.session_state.feed and st.session_state.feed[-1][2] == text:
+                return
+            import time as _t
+            live["t0"] = live["t0"] or _t.time()
+            st.session_state.feed.append((f"+{_t.time() - live['t0']:5.1f}s", kind, text))
+            if step:
+                for k, (c, _) in list(live["states"].items()):
+                    if c == "active" and k != step:
+                        live["states"][k] = ("done", None)
+                if phase == "wait":
+                    live["states"][step] = ("wait", "waiting for you")
+                elif phase in ("started", "guard"):
+                    live["states"][step] = ("active", "working…")
+                elif phase == "finished":
+                    live["states"][step] = ("done", None)
+            flow_ph.markdown(flow_html(live["states"]), unsafe_allow_html=True)
+            rows = "".join(f'<div class="fl"><span class="ft">{t}</span><span class="fk {k}">{k.upper()}</span>'
+                           f'<span>{esc(x)}</span></div>' for t, k, x in st.session_state.feed[-14:])
+            feed_ph.markdown('<div class="dp-live-head"><span class="dp-dot"></span>Agents at work</div>'
+                             f'<div class="dp-feed">{rows}</div>', unsafe_allow_html=True)
+
+        flow_ph.markdown(flow_html({"RAG": ("active", "starting…")}), unsafe_allow_html=True)
+        feed_ph.markdown('<div class="dp-live-head"><span class="dp-dot"></span>Agents at work</div><div class="dp-feed">'
+                         '<div class="fl"><span class="ft">+  0.0s</span><span class="fk agent">SYSTEM</span>'
+                         '<span>Starting the CrewAI and Google ADK agents and an isolated sandbox…</span></div></div>',
+                         unsafe_allow_html=True)
+        callback_manager.subscribe(_listener)
+        try:
+            st.session_state.metrics = run_pipeline(prompt.strip(), ARCH_OPTIONS[arch_label],
+                                                    PERSONAS[persona_label], PROMPT_STYLES[style_label],
+                                                    st.session_state.repo_url, st.session_state.repo_branch)
+        except Exception as exc:  # noqa: BLE001
+            st.session_state.metrics = None
+            st.error(friendly_error(f"{type(exc).__name__}: {exc}"))
+        finally:
+            callback_manager.unsubscribe(_listener)
+        feed_ph.empty()
 
     m = st.session_state.metrics
-    done = m is not None
-    flow = [("RAG", "ADK"), ("Plan", "CrewAI"), ("Code", "ADK"), ("Test", "ADK + MCP"),
-            ("Repair", "Debugger · Manager"), ("Audit", "CrewAI"), ("Approve", "Human")]
-    def node_state(step: str):
-        """(css class, prefix, subtitle override) for one pipeline step after a run."""
-        if not done:
-            return "", "", None
-        if step == "Repair":
-            n = m.failure_recovery_cycles
-            return ("done", "✓ ", f"{n} cycle{'s' if n != 1 else ''}") if n else ("", "", "not needed")
-        if step == "Approve":
-            status_ = global_blackboard.state.human_approval_status
-            if status_ == "approved":
-                return "done", "✓ ", "approved"
-            return ("", "", "rejected") if status_ == "rejected" else ("wait", "", "waiting for you")
-        return ("done", "✓ ", None) if m.success or step in ("RAG", "Plan", "Code", "Test") else ("", "", None)
-
-    cells = []
-    for t, s in flow:
-        cls, pre, sub = node_state(t)
-        cells.append(f'<div class="dp-node {cls}"><b>{pre}{t}</b><span>{sub or s}</span></div>')
-    html('<div class="dp-flow">' + "".join(cells) + "</div>")
+    flow_ph.markdown(flow_html(final_states(m)), unsafe_allow_html=True)
 
     if m is None:
-        html('<div class="dp-card" style="text-align:center;padding:34px;margin-top:14px"><div class="dp-ico" style="margin:0 auto">🤖</div>'
-             '<h4>Ready when you are</h4><p>Pick a task and press <b>Run the agents</b>. A run takes 30-60 seconds and makes 3-5 Gemini calls.</p></div>')
+        feed_ph.markdown(f'<div class="dp-card" style="text-align:center;padding:34px;margin-top:14px"><div class="dp-ico" style="margin:0 auto">{icon("bot")}</div>'
+             '<h4>Ready when you are</h4><p>Pick a task and press <b>Run the agents</b>. A run takes 30-60 seconds and makes 3-5 Gemini calls.</p></div>', unsafe_allow_html=True)
     else:
         bb = global_blackboard.state
         if m.success:
-            html('<div class="dp-banner ok">✅ All tests pass, no regressions and the security audit is clean. Review the change and approve it below.</div>')
+            html(f'<div class="dp-banner ok" style="display:flex;gap:10px;align-items:center">{icon("check")} All tests pass, no regressions and the security audit is clean. Review the change and approve it in the Approve tab.</div>')
         else:
-            html(f'<div class="dp-banner bad">❌ The run did not pass. {esc(friendly_error(m.error_details or ""))[:400]}</div>')
+            html(f'<div class="dp-banner bad" style="display:flex;gap:10px;align-items:center">{icon("x")} The run did not pass. {esc(friendly_error(m.error_details or ""))[:400]}</div>')
         cov = (m.quality or {}).get("coverage") or {}
         kpis([("Result", "Passed" if m.success else "Failed", "dp-ok" if m.success else "dp-bad"),
               ("Tests", f"{m.tests_passed}/{m.tests_total}", ""), ("Time", f"{m.total_execution_time_seconds:.1f}s", ""),
@@ -447,21 +624,39 @@ with tab_run:
                    f"{m.a2a_message_count} A2A messages · {m.tool_call_count} tool calls")
 
         t_diff, t_tests, t_agents, t_plan, t_msgs, t_approve = st.tabs(
-            ["Code change", "Tests", "Agents & timing", "Plan & decisions", "A2A messages", "Approve"])
+            ["Code change", "Tests", "Agents & timing", "Plan & decisions", "Messages & activity", "Approve"])
         with t_diff:
             delivery = bb.final_delivery
             diff = delivery.unified_diff if delivery and delivery.unified_diff else ""
             if not diff and m.run_id:
                 diff = mcp_repo_client.get_diff(m.run_id).get("diff", "")
-            st.code(diff or "No changes produced.", language="diff")
+            if diff:
+                adds = sum(1 for ln in diff.splitlines() if ln.startswith("+") and not ln.startswith("+++"))
+                dels = sum(1 for ln in diff.splitlines() if ln.startswith("-") and not ln.startswith("---"))
+                files = [ln[6:] for ln in diff.splitlines() if ln.startswith("+++ b/")]
+                html(f'<div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;color:var(--muted);font-size:0.85rem">'
+                     f'{icon("file", 16)} <b style="color:var(--text)">{esc(", ".join(files) or "changes")}</b>'
+                     f'<span style="color:#34D399;font-weight:700">+{adds}</span><span style="color:#F87171;font-weight:700">−{dels}</span></div>')
+                html(diff_html(diff))
+            else:
+                st.info("No changes produced.")
         with t_tests:
             if bb.test_reports:
                 rep = bb.test_reports[-1]
-                st.markdown(f"**{rep.passed} of {rep.total_tests} tests passed** in {rep.execution_time_seconds:.2f}s "
-                            "(existing suite + tests written by the ADK Tester).")
-                st.dataframe(pd.DataFrame([{"Test": i.test_node_id, "Result": "✅ passed" if i.outcome == "passed" else f"❌ {i.outcome}",
-                                            "Message": (i.failure_message or "")[:200]} for i in rep.items]),
-                             hide_index=True, width="stretch")
+                pct = 100 * rep.passed / rep.total_tests if rep.total_tests else 0
+                generated = sum(1 for i in rep.items if "devpilot_generated" in i.test_node_id)
+                html(f'<div style="display:flex;justify-content:space-between;color:var(--text);font-weight:700">'
+                     f'<span>{rep.passed} of {rep.total_tests} tests passed</span><span style="color:var(--muted);font-weight:500">'
+                     f'{generated} new tests written by the ADK Tester · {rep.execution_time_seconds:.2f}s</span></div>'
+                     f'<div class="dp-bar"><div style="width:{pct:.1f}%"></div></div>')
+                chips = "".join(
+                    f'<span class="dp-chip-t {"ok" if i.outcome == "passed" else "bad"} {"new" if "devpilot_generated" in i.test_node_id else ""}" '
+                    f'title="{esc(i.test_node_id)}">{esc(i.test_node_id.split("::")[-1])}</span>' for i in rep.items[:600])
+                html(f'<div class="dp-chips">{chips}</div>')
+                st.caption("Outlined chips are new tests generated for this change.")
+                failed = [i for i in rep.items if i.outcome != "passed"]
+                for i in failed[:10]:
+                    st.error(f"{i.test_node_id}: {(i.failure_message or '')[:300]}")
             regs = bb.metadata.get("regressions") or []
             snap = tool_validation_stats.snapshot()
             st.caption(f"Regressions vs. original code: {len(regs) or 'none'} · Tool-output validation: "
@@ -511,6 +706,11 @@ with tab_run:
                 st.caption(f"Security audit (CrewAI Auditor): {'passed' if bb.security_audit.passed else 'issues found'} · "
                            f"Blackboard version v{bb.version}")
         with t_msgs:
+            if st.session_state.get("feed"):
+                with st.expander(f"Live activity log ({len(st.session_state.feed)} events)"):
+                    rows = "".join(f'<div class="fl"><span class="ft">{t}</span><span class="fk {k}">{k.upper()}</span>'
+                                   f'<span>{esc(x)}</span></div>' for t, k, x in st.session_state.feed)
+                    html(f'<div class="dp-feed" style="max-height:420px">{rows}</div>')
             hist = global_a2a_bus.get_history()
             if hist:
                 st.dataframe(pd.DataFrame([{"Time": e.timestamp.strftime("%H:%M:%S"), "From": e.sender_id, "To": e.recipient_id,
@@ -587,7 +787,7 @@ with tab_arch:
            ("📡", "Callbacks", "Agent start/finish/error, tool start/end and guardrail callbacks; every MCP result is schema-validated."),
            ("🧾", "Provenance", "Usage ledger with per-agent tokens, latency and cost; signed A2A envelopes and a SHA-256 chained provenance log.")]
     html('<div class="dp-grid dp-g4">' + "".join(
-        f'<div class="dp-card"><div class="dp-ico">{i}</div><h4>{t}</h4><p>{d}</p></div>' for i, t, d in sec) + "</div>")
+        f'<div class="dp-card"><div class="dp-ico">{ico(i)}</div><h4>{t}</h4><p>{d}</p></div>' for i, t, d in sec) + "</div>")
 
 # =============================================================================
 # RESULTS
