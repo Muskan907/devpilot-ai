@@ -1,8 +1,8 @@
 {
   "version": 24,
-  "updated_at": "2026-11-25T17:12:48.581453Z",
+  "updated_at": "2026-11-25T17:26:41.479227Z",
   "requirement": {
-    "id": "REQ-20261125171245",
+    "id": "REQ-20261125172638",
     "raw_prompt": "Add a standard_deviation(numbers, sample=False) method to AdvancedCalculator in src/calculator.py. It must raise ValueError for an empty list, and for sample=True with fewer than two values.",
     "target_repo_path": "sample_repo",
     "repo_config": {
@@ -12,11 +12,11 @@
       "is_github": false,
       "auth_token": null
     },
-    "submitted_at": "2026-11-25T17:12:45.656482Z",
+    "submitted_at": "2026-11-25T17:26:38.818769Z",
     "metadata": {}
   },
   "analysis": {
-    "requirement_id": "REQ-20261125171245",
+    "requirement_id": "REQ-20261125172638",
     "title": "Implement standard_deviation method in AdvancedCalculator",
     "problem_statement": "Add a standard_deviation(numbers, sample=False) method to AdvancedCalculator in src/calculator.py. It must raise ValueError for an empty list, and for sample=True with fewer than two values.",
     "feature_category": "feature_addition",
@@ -53,8 +53,8 @@
     ]
   },
   "plan": {
-    "plan_id": "PLAN-20261125171245",
-    "requirement_id": "REQ-20261125171245",
+    "plan_id": "PLAN-20261125172638",
+    "requirement_id": "REQ-20261125172638",
     "strategy_summary": "Federated Multi-Agent execution: CrewAI plans and audits; Google ADK codes and tests; MCP isolates execution.",
     "tasks": [
       {
@@ -80,8 +80,8 @@
         ],
         "status": "completed",
         "output_summary": "Google ADK patched src/calculator.py (+15 diff lines)",
-        "started_at": "2026-11-25T17:12:45.672581Z",
-        "completed_at": "2026-11-25T17:12:45.684784Z"
+        "started_at": "2026-11-25T17:26:38.832937Z",
+        "completed_at": "2026-11-25T17:26:38.842403Z"
       },
       {
         "id": "TSK-03-TESTING",
@@ -94,8 +94,8 @@
         ],
         "status": "completed",
         "output_summary": "Tests evaluated: 9/9 passed (All Passed: True); regressions: 0",
-        "started_at": "2026-11-25T17:12:45.690004Z",
-        "completed_at": "2026-11-25T17:12:48.554257Z"
+        "started_at": "2026-11-25T17:26:38.849417Z",
+        "completed_at": "2026-11-25T17:26:41.458850Z"
       },
       {
         "id": "TSK-04-SECURITY-AUDIT",
@@ -109,7 +109,7 @@
         "status": "completed",
         "output_summary": "Quality and security audit completed successfully",
         "started_at": null,
-        "completed_at": "2026-11-25T17:12:48.578408Z"
+        "completed_at": "2026-11-25T17:26:41.477462Z"
       },
       {
         "id": "TSK-05-HUMAN-GATE",
@@ -126,14 +126,14 @@
         "completed_at": null
       }
     ],
-    "created_at": "2026-11-25T17:12:45.662817Z",
+    "created_at": "2026-11-25T17:26:38.824416Z",
     "current_task_index": 1,
     "is_completed": false,
     "replan_count": 0
   },
   "working_proposals": [
     {
-      "proposal_id": "CCP-20261125171245",
+      "proposal_id": "CCP-20261125172638",
       "task_id": "TSK-02-CODING",
       "author_agent": "GoogleADK:CoderAgent",
       "framework": "google_adk",
@@ -150,7 +150,7 @@
           "justification": "Google ADK Runner synthesis for task TSK-02-CODING"
         }
       ],
-      "created_at": "2026-11-25T17:12:45.682341Z",
+      "created_at": "2026-11-25T17:26:38.842403Z",
       "is_validated_by_tests": false,
       "is_approved_by_human": false,
       "approval_notes": null
@@ -171,14 +171,14 @@
   },
   "test_reports": [
     {
-      "report_id": "TEST-20261125171248",
+      "report_id": "TEST-20261125172641",
       "total_tests": 9,
       "passed": 9,
       "failed": 0,
       "errors": 0,
       "skipped": 0,
       "all_passed": true,
-      "execution_time_seconds": 2.821,
+      "execution_time_seconds": 2.568,
       "items": [
         {
           "test_node_id": "tests/test_calculator.py::test_add",
@@ -235,19 +235,19 @@
           "failure_message": null
         }
       ],
-      "raw_stdout": "============================= test session starts =============================\ncollecting ... collected 9 items\n\ntests/test_calculator.py::test_add PASSED                                [ 11%]\ntests/test_calculator.py::test_subtract PASSED                           [ 22%]\ntests/test_calculator.py::test_multiply PASSED                           [ 33%]\ntests/test_calculator.py::test_divide PASSED                             [ 44%]\ntests/test_calculator.py::test_mean PASSED                               [ 55%]\ntests/test_calculator.py::test_standard_deviation_population PASSED      [ 66%]\ntests/test_calculator.py::test_standard_deviation_sample PASSED          [ 77%]\ntests/test_calculator.py::test_standard_deviation_empty_raises PASSED    [ 88%]\ntests/test_calculator.py::test_standard_deviation_single_element_sample_raises PASSED [100%]\n\n============================== 9 passed in 1.06s ==============================\n",
+      "raw_stdout": "============================= test session starts =============================\ncollecting ... collected 9 items\n\ntests/test_calculator.py::test_add PASSED                                [ 11%]\ntests/test_calculator.py::test_subtract PASSED                           [ 22%]\ntests/test_calculator.py::test_multiply PASSED                           [ 33%]\ntests/test_calculator.py::test_divide PASSED                             [ 44%]\ntests/test_calculator.py::test_mean PASSED                               [ 55%]\ntests/test_calculator.py::test_standard_deviation_population PASSED      [ 66%]\ntests/test_calculator.py::test_standard_deviation_sample PASSED          [ 77%]\ntests/test_calculator.py::test_standard_deviation_empty_raises PASSED    [ 88%]\ntests/test_calculator.py::test_standard_deviation_single_element_sample_raises PASSED [100%]\n\n============================== 9 passed in 1.01s ==============================\n",
       "raw_stderr": "",
-      "timestamp": "2026-11-25T17:12:48.546532Z"
+      "timestamp": "2026-11-25T17:26:41.452831Z"
     }
   ],
   "security_audit": {
-    "audit_id": "SEC-20261125171248",
+    "audit_id": "SEC-20261125172641",
     "passed": true,
     "prompt_injection_detected": false,
     "ast_security_violations": [],
     "path_traversal_violations": [],
     "recommendation": "Safe to proceed: No injection or dangerous syscalls detected.",
-    "scanned_at": "2026-11-25T17:12:48.568280Z"
+    "scanned_at": "2026-11-25T17:26:41.469336Z"
   },
   "provenance_records": [
     {
@@ -256,59 +256,59 @@
       "agent_id": "GoogleADK:RepositoryRAGAgent",
       "framework": "google_adk",
       "action_type": "rag_retrieval",
-      "input_payload_hash": "bdce9d9d68a0374abbc774e9b401887eb25093c520a8b6a10631d1d40cd4892c",
+      "input_payload_hash": "7c4c0aa7c584b47ae31b87caeada222b4a7124f83b2e3089b39a8e3c191b0212",
       "output_payload_hash": "e0fbea6a4dc80ca9edc14bbb9b235f253ad519e6e2b7768894df290248dfbcba",
       "state_version": 5,
-      "timestamp": "2026-11-25T17:12:45.653014Z",
-      "record_hash": "58d70f642a5301a16637857c6fcaaea538385d4bf2cb0805f4d6922f3cf4cc75"
+      "timestamp": "2026-11-25T17:26:38.816174Z",
+      "record_hash": "d9708ce0f7bc5ad00aafad75689d258573f83520a38741be95e3b1d8f9d48c56"
     },
     {
       "step_id": "STEP-1-PLAN",
-      "parent_step_id": "58d70f642a5301a16637857c6fcaaea538385d4bf2cb0805f4d6922f3cf4cc75",
+      "parent_step_id": "d9708ce0f7bc5ad00aafad75689d258573f83520a38741be95e3b1d8f9d48c56",
       "agent_id": "CrewAI:PlannerAgent",
       "framework": "crewai",
       "action_type": "plan",
       "input_payload_hash": "0248dd62184329eb7306a6f83e1532ea87d52c3384131d8eae01a9c8489157d1",
-      "output_payload_hash": "15d6974983ba4900e124b0dae689d9d4d9ef9c865cb1f959c68085022155d732",
+      "output_payload_hash": "e0f459075e695093b95bb8947f925b4d280f0f626fdfee8521df4e7544a81dc8",
       "state_version": 9,
-      "timestamp": "2026-11-25T17:12:45.665466Z",
-      "record_hash": "2df3491ba3ea7e518847036e956faef9b5d33fbab36486c6f3b0fa1426498ed1"
+      "timestamp": "2026-11-25T17:26:38.827069Z",
+      "record_hash": "cd2e807f01ad604700b5ef903ef70f57fb817e474356786ed09d0927b853cec1"
     },
     {
       "step_id": "STEP-2-CODE",
-      "parent_step_id": "2df3491ba3ea7e518847036e956faef9b5d33fbab36486c6f3b0fa1426498ed1",
+      "parent_step_id": "cd2e807f01ad604700b5ef903ef70f57fb817e474356786ed09d0927b853cec1",
       "agent_id": "GoogleADK:CoderAgent",
       "framework": "google_adk",
       "action_type": "code_generation",
       "input_payload_hash": "01e8867d7d65c4443400b4c0e3f08c634ebf72aeb2e1d8a8330ff4967b293b09",
       "output_payload_hash": "892dc4bbf22711e5a7b7133fb8d63f84dbbcf39aa0b5bb6b4a78e64194891dab",
       "state_version": 13,
-      "timestamp": "2026-11-25T17:12:45.688531Z",
-      "record_hash": "c19f280f66023697fee5333aa2d522bad4c7ed91bd75ee6ea437b53355dfe88f"
+      "timestamp": "2026-11-25T17:26:38.847892Z",
+      "record_hash": "def88b0f15ea5570bc8f03531f014e4c1833e70766a4640f3345cee225c8916a"
     },
     {
       "step_id": "STEP-3-TEST",
-      "parent_step_id": "c19f280f66023697fee5333aa2d522bad4c7ed91bd75ee6ea437b53355dfe88f",
+      "parent_step_id": "def88b0f15ea5570bc8f03531f014e4c1833e70766a4640f3345cee225c8916a",
       "agent_id": "GoogleADK:TestGeneratorAgent",
       "framework": "google_adk",
       "action_type": "test_run",
-      "input_payload_hash": "291013deab87dea4dd6daa58641f9e49eb50256391e16b8abc565ba791474379",
+      "input_payload_hash": "22448f9a8b0208a49c0b9b5416c8f0e35fa66ad9b1574b5c0484addc79208418",
       "output_payload_hash": "e9b0dde144d751f393e4f52c53bc131eb13af3326bdc517d258c82ee8bc6d3ac",
       "state_version": 18,
-      "timestamp": "2026-11-25T17:12:48.557916Z",
-      "record_hash": "adc7f2f653b5dae678881e7a076bd273b76f802b0185c203373517837db562c5"
+      "timestamp": "2026-11-25T17:26:41.460373Z",
+      "record_hash": "af4c0b4774e83ea1c1e847ee52534e81970775d750ac58d1be8bcdc732d6d052"
     },
     {
       "step_id": "STEP-4-SECURITY",
-      "parent_step_id": "adc7f2f653b5dae678881e7a076bd273b76f802b0185c203373517837db562c5",
+      "parent_step_id": "af4c0b4774e83ea1c1e847ee52534e81970775d750ac58d1be8bcdc732d6d052",
       "agent_id": "SecurityGuardrailSuite",
       "framework": "system",
       "action_type": "security_audit",
       "input_payload_hash": "bf6d612263f890f528516d56ef1df7634dac861b3affc42113c1f521e5269eaa",
       "output_payload_hash": "501ce0d6d8516a4567f96bbc310c19af3d1d1cf7157ea986c4abbddc70dc9876",
       "state_version": 20,
-      "timestamp": "2026-11-25T17:12:48.570799Z",
-      "record_hash": "bf16509c53c1f1f5df9ca3bd9bf3cfb1101239f8dd3d760fa191f6ed3a7aee48"
+      "timestamp": "2026-11-25T17:26:41.471882Z",
+      "record_hash": "3d9a4ad6f6b3c40db456bcb8969c09c022867d98b84b4dfa6cf5e4238031614c"
     }
   ],
   "human_approval_status": "pending",
@@ -317,10 +317,10 @@
   "failure_diagnoses": [],
   "manager_decisions": [],
   "final_delivery": {
-    "delivery_id": "DELIV-20261125171248",
-    "requirement_id": "REQ-20261125171245",
-    "plan_id": "PLAN-20261125171245",
-    "summary_of_changes": "Autonomous Software Engineering Delivery for REQ-20261125171245: 1 file(s) modified. Tests: 9/9 passing. Security Audit: PASSED. Provenance: 5 linked audit blocks.",
+    "delivery_id": "DELIV-20261125172641",
+    "requirement_id": "REQ-20261125172638",
+    "plan_id": "PLAN-20261125172638",
+    "summary_of_changes": "Autonomous Software Engineering Delivery for REQ-20261125172638: 1 file(s) modified. Tests: 9/9 passing. Security Audit: PASSED. Provenance: 5 linked audit blocks.",
     "patches": [
       {
         "file_path": "src/calculator.py",
@@ -333,15 +333,15 @@
       "total": 9,
       "passed": 9,
       "failed": 0,
-      "duration_seconds": 2.821
+      "duration_seconds": 2.568
     },
     "unified_diff": "",
     "provenance_chain_length": 5,
-    "provenance_root_hash": "bf16509c53c1f1f5df9ca3bd9bf3cfb1101239f8dd3d760fa191f6ed3a7aee48",
+    "provenance_root_hash": "3d9a4ad6f6b3c40db456bcb8969c09c022867d98b84b4dfa6cf5e4238031614c",
     "human_approved": false,
     "approver_identity": null,
     "approval_timestamp": null,
-    "delivered_at": "2026-11-25T17:12:48.575973Z"
+    "delivered_at": "2026-11-25T17:26:41.475694Z"
   },
   "metadata": {
     "repository": {
@@ -349,18 +349,18 @@
       "is_github": false,
       "base_branch": "main",
       "agentic_branch": null,
-      "sandbox_path": "C:\\Users\\muska\\Desktop\\agentic\\MultiAgent-Software-Engineering\\sandbox_workspace\\runs\\run_3c8a0b92fe",
-      "run_id": "run_3c8a0b92fe"
+      "sandbox_path": "C:\\Users\\muska\\Desktop\\agentic\\MultiAgent-Software-Engineering\\sandbox_workspace\\runs\\run_cfcc12878e",
+      "run_id": "run_cfcc12878e"
     },
     "baseline_test_report": {
-      "report_id": "TEST-20261125171245",
+      "report_id": "TEST-20261125172638",
       "total_tests": 5,
       "passed": 5,
       "failed": 0,
       "errors": 0,
       "skipped": 0,
       "all_passed": true,
-      "execution_time_seconds": 3.675,
+      "execution_time_seconds": 2.805,
       "items": [
         {
           "test_node_id": "tests/test_calculator.py::test_add",
@@ -393,13 +393,13 @@
           "failure_message": null
         }
       ],
-      "raw_stdout": "============================= test session starts =============================\ncollecting ... collected 5 items\n\ntests/test_calculator.py::test_add PASSED                                [ 20%]\ntests/test_calculator.py::test_subtract PASSED                           [ 40%]\ntests/test_calculator.py::test_multiply PASSED                           [ 60%]\ntests/test_calculator.py::test_divide PASSED                             [ 80%]\ntests/test_calculator.py::test_mean PASSED                               [100%]\n\n============================== 5 passed in 1.29s ==============================\n",
+      "raw_stdout": "============================= test session starts =============================\ncollecting ... collected 5 items\n\ntests/test_calculator.py::test_add PASSED                                [ 20%]\ntests/test_calculator.py::test_subtract PASSED                           [ 40%]\ntests/test_calculator.py::test_multiply PASSED                           [ 60%]\ntests/test_calculator.py::test_divide PASSED                             [ 80%]\ntests/test_calculator.py::test_mean PASSED                               [100%]\n\n============================== 5 passed in 1.04s ==============================\n",
       "raw_stderr": "",
-      "timestamp": "2026-11-25T17:12:45.402580Z"
+      "timestamp": "2026-11-25T17:26:38.610182Z"
     },
     "retrieved_context": {
       "query": "Add a standard_deviation(numbers, sample=False) method to AdvancedCalculator in src/calculator.py. It must raise ValueError for an empty list, and for sample=True with fewer than two values.",
-      "repo_id": "run_3c8a0b92fe",
+      "repo_id": "run_cfcc12878e",
       "chunk_count": 5,
       "chunks": [
         {
