@@ -132,6 +132,7 @@ div[role="tablist"] { gap:4px !important; background:rgba(18,25,53,0.8); border:
 .dp-node b { display:block; font-size:0.86rem; color:var(--text); }
 .dp-node span { font-size:0.72rem; color:var(--muted); }
 .dp-node.done { border-color:rgba(52,211,153,0.5); background:rgba(52,211,153,0.07); }
+.dp-node.wait { border-color:rgba(251,191,36,0.55); background:rgba(251,191,36,0.07); }
 
 /* form widgets */
 .stTextArea textarea, .stTextInput input { background:var(--panel) !important; border:1px solid var(--line) !important; border-radius:12px !important; color:var(--text) !important; }
@@ -408,8 +409,25 @@ with tab_run:
     done = m is not None
     flow = [("RAG", "ADK"), ("Plan", "CrewAI"), ("Code", "ADK"), ("Test", "ADK + MCP"),
             ("Repair", "Debugger · Manager"), ("Audit", "CrewAI"), ("Approve", "Human")]
-    html('<div class="dp-flow">' + "".join(
-        f'<div class="dp-node {"done" if done else ""}"><b>{"✓ " if done else ""}{t}</b><span>{s}</span></div>' for t, s in flow) + "</div>")
+    def node_state(step: str):
+        """(css class, prefix, subtitle override) for one pipeline step after a run."""
+        if not done:
+            return "", "", None
+        if step == "Repair":
+            n = m.failure_recovery_cycles
+            return ("done", "✓ ", f"{n} cycle{'s' if n != 1 else ''}") if n else ("", "", "not needed")
+        if step == "Approve":
+            status_ = global_blackboard.state.human_approval_status
+            if status_ == "approved":
+                return "done", "✓ ", "approved"
+            return ("", "", "rejected") if status_ == "rejected" else ("wait", "", "waiting for you")
+        return ("done", "✓ ", None) if m.success or step in ("RAG", "Plan", "Code", "Test") else ("", "", None)
+
+    cells = []
+    for t, s in flow:
+        cls, pre, sub = node_state(t)
+        cells.append(f'<div class="dp-node {cls}"><b>{pre}{t}</b><span>{sub or s}</span></div>')
+    html('<div class="dp-flow">' + "".join(cells) + "</div>")
 
     if m is None:
         html('<div class="dp-card" style="text-align:center;padding:34px;margin-top:14px"><div class="dp-ico" style="margin:0 auto">🤖</div>'
